@@ -65,10 +65,10 @@ if(isset($_POST['submit'])){
       
       <input type="email" name="email" placeholder="Enter Email" required>
       
-      <input type="password" name="password" placeholder="Enter Password" required>
+      <input type="password" name="password" class="password" placeholder="Enter Password" required>
       
       <div class="items">
-        <input  type="password" name="compassword" placeholder="Enter Comfirm Password" required>
+        <input  type="password" name="compassword" class="password" placeholder="Enter Comfirm Password" required>
         <i class='bx bx-hide hide_icone'></i>
       </div>
 
