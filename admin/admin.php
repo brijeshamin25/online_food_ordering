@@ -24,8 +24,8 @@ if(!isset($_SESSION['admin_nm'])){
       <h3>Hi, <span>admin</span></h3>
       <h1>Welcome <span><?php echo $_SESSION['admin_nm'] ?></span></h1>
       <p>This is an Admin Panel</p>
-      <a href="login.php" class="btn">Login</a>
-      <a href="signup.php" class="btn">Signup</a>
+      <a href="../login.php" class="btn">Login</a>
+      <a href="../signup.php" class="btn">Signup</a>
       <a href="../logout.php" class="btn">Logout</a>
     </div>
   </div>
