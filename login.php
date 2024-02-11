@@ -20,7 +20,7 @@ if(isset($_POST['submit'])){
       echo"
         <script>
           alert('Admin Login Successfully...!');
-          window.location.href = 'admin.php';
+          window.location.href = 'admin/admin.php';
         </script>";
       // header('location:admin/admin.php');
     }elseif($row['user_type'] === 'customer'){
@@ -28,7 +28,7 @@ if(isset($_POST['submit'])){
       echo"
         <script>
           alert('Customer Login Successfully...!');
-          window.location.href = 'user.php';
+          window.location.href = 'user/user.php';
         </script>";
       // header('location:../user/user.php');
     }
