@@ -16,7 +16,7 @@ if(isset($_POST['submit'])){
     $row = mysqli_fetch_array($res);
 
     if($row['user_type'] === 'admin'){
-      $_SESSION['admin_nm'] = $row['name'];
+      $_SESSION['admin_nm'] = $row['fname'];
       echo"
         <script>
           alert('Admin Login Successfully...!');
@@ -24,7 +24,7 @@ if(isset($_POST['submit'])){
         </script>";
       // header('location:admin/admin.php');
     }elseif($row['user_type'] === 'customer'){
-      $_SESSION['cust_name'] = $row['name'];
+      $_SESSION['cust_name'] = $row['fname'];
       echo"
         <script>
           alert('Customer Login Successfully...!');

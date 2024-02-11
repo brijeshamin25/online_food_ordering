@@ -1,13 +1,12 @@
 <?php
-
-include('database.php');
+include ('database.php');
 
 session_start();
 
-// if(!isset($_SESSION['admin_nm'])){
-//   header('location:login.php');
-// }
- ?>
+if(!isset($_SESSION['admin_nm'])){
+  header('location:login.php');
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -23,7 +22,7 @@ session_start();
   <div class="admin_container">
     <div class="content">
       <h3>Hi, <span>admin</span></h3>
-      <h1>Welcome<span><?php echo $_SESSION['admin_nm'] ?></span></h1>
+      <h1>Welcome <span><?php echo $_SESSION['admin_nm'] ?></span></h1>
       <p>This is an Admin Panel</p>
       <a href="login.php" class="btn">Login</a>
       <a href="signup.php" class="btn">Signup</a>
