@@ -24,7 +24,7 @@ if(isset($_POST['submit'])){
         </script>";
       // header('location:admin/admin.php');
     }elseif($row['user_type'] === 'customer'){
-      $_SESSION['cust_name'] = $row['fname'];
+      $_SESSION['cust_nm'] = $row['fname'];
       echo"
         <script>
           alert('Customer Login Successfully...!');

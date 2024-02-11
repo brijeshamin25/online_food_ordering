@@ -1,9 +1,19 @@
+<?php
+include('../database.php');
+
+session_start();
+
+if(!isset($_SESSION['cust_nm'])){
+  header('location:login.php');
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>User Panle</title>
+  <title>Customer Panle</title>
 
   <!--CSS Link-->
   <link rel="stylesheet" href="../admin/assets/css/style.css">  
@@ -12,7 +22,7 @@
   <div class="admin_container">
     <div class="content">
       <h3>Hi, <span>User</span></h3>
-      <h1>Welcome<span></span></h1>
+      <h1>Welcome <span><?php echo $_SESSION['cust_nm'] ?></span></h1>
       <p>This is an User Panel</p>
       <a href="login.php" class="btn">Login</a>
       <a href="signup.php" class="btn">Signup</a>
