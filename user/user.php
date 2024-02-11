@@ -16,7 +16,7 @@
       <p>This is an User Panel</p>
       <a href="login.php" class="btn">Login</a>
       <a href="signup.php" class="btn">Signup</a>
-      <a href="logout.php" class="btn">Logout</a>
+      <a href="../logout.php" class="btn">Logout</a>
     </div>
   </div>
 </body>
