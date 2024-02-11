@@ -1,14 +1,12 @@
 <?php
 include ('database.php');
+
 session_start();
 
 if(isset($_POST['submit'])){
-  // $fnm = mysqli_real_escape_string($con, $_POST['fname']);
-  // $lnm = mysqli_real_escape_string($con, $_POST['lname']);
   $eml = mysqli_real_escape_string($con, $_POST['email']);
   $pass = md5($_POST['password']);
-  // $cpass = md5($_POST['compassword']);
-  $user_type = $_POST['user_feild'];
+  //$user_type = $_POST['user_type'];
 
   $sql = "select * from reg_login where email = '$eml' and password = '$pass'";
 
@@ -17,12 +15,22 @@ if(isset($_POST['submit'])){
   if(mysqli_num_rows($res) > 0){
     $row = mysqli_fetch_array($res);
 
-    if($row['user_feild'] === 'admin'){
+    if($row['user_type'] === 'admin'){
       $_SESSION['admin_nm'] = $row['name'];
-      header('location:admin.php');
-    }elseif($row['user_feild'] === 'customer'){
-      $_SESSION['cust_nm'] = $row['name'];
-      header('location:../user/user.php');
+      echo"
+        <script>
+          alert('Admin Login Successfully...!');
+          window.location.href = 'admin.php';
+        </script>";
+      // header('location:admin/admin.php');
+    }elseif($row['user_type'] === 'customer'){
+      $_SESSION['cust_name'] = $row['name'];
+      echo"
+        <script>
+          alert('Customer Login Successfully...!');
+          window.location.href = 'user.php';
+        </script>";
+      // header('location:../user/user.php');
     }
 
   }else{
@@ -61,11 +69,11 @@ if(isset($_POST['submit'])){
 
           <form action="" method="post">
             <div class="items input_div">
-              <input type="email" placeholder="Enter Email" class="input" name="email">
+              <input type="email" placeholder="Enter Email" class="input" name="email" require>
             </div>
 
             <div class="items input_div">
-              <input type="password" placeholder="Enter Password" class="password" name="password">
+              <input type="password" placeholder="Enter Password" class="password" name="password" require>
               <i class='bx bx-hide hide_icone'></i>
             </div>
 

@@ -44,6 +44,30 @@
   border-radius: 6px;
 }
 
+form .items{
+  position: relative;
+}
+
+.constiner_forms form .hide_icone{
+  position: absolute;
+  top: 25%;
+  right: 1rem;
+  font-size: 18px;
+  padding: 5px;
+  color: #8b8b8b;
+  cursor: pointer;
+}
+
+form input{
+  border: 1px solid #dfdcdc;
+  padding: 0 10px;
+  outline: none;
+}
+
+form input:focus{
+  border-bottom-width: 3px;
+}
+
 .constiner_forms form select option{
   background-color: white;
 }

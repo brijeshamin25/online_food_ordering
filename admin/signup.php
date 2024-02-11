@@ -1,5 +1,5 @@
 <?php
-@include 'database.php';
+include ('database.php');
 
 if(isset($_POST['submit'])){
   $fnm = mysqli_real_escape_string($con, $_POST['fname']);
@@ -7,9 +7,9 @@ if(isset($_POST['submit'])){
   $eml = mysqli_real_escape_string($con, $_POST['email']);
   $pass = md5($_POST['password']);
   $cpass = md5($_POST['compassword']);
-  $user_type = $_POST['user_feild'];
+  $user_type = $_POST['user_type'];
 
-  $sql = "select * from reg_login where email = '$eml' && password = '$pass'";
+  $sql = "select * from reg_login where email = '$eml' and password = '$pass'";
 
   $res = mysqli_query($con,$sql);
   
@@ -21,7 +21,11 @@ if(isset($_POST['submit'])){
     }else{
       $sql_insert = "insert into reg_login(fname,lname,email,password,user_type) values('$fnm','$lnm','$eml','$pass','$user_type')";
       mysqli_query($con,$sql_insert);
-      header('location:login.php');
+      echo"
+        <script>
+          alert('Sign up Successfully...!');
+          window.location.href = 'login.php';
+        </script>";
     }
   }
 };
@@ -43,7 +47,7 @@ if(isset($_POST['submit'])){
 </head>
 <body>
 
-  <div class="constiner_forms">
+  <div class="constiner_forms forms">
     <form action="" method="post">
       <h3>Sign Up</h3>
       
@@ -63,9 +67,12 @@ if(isset($_POST['submit'])){
       
       <input type="password" name="password" placeholder="Enter Password" required>
       
-      <input type="password" name="compassword" placeholder="Enter Comfirm Password" required>
+      <div class="items">
+        <input  type="password" name="compassword" placeholder="Enter Comfirm Password" required>
+        <i class='bx bx-hide hide_icone'></i>
+      </div>
 
-      <select name="user_feild">
+      <select name="user_type">
         <option value="customer">Customer</option>
         <option value="admin">Admin</option>
       </select>
