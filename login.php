@@ -52,12 +52,13 @@ if(isset($_POST['submit'])){
   <!-- CSS Link -->
   <link rel="stylesheet" href="assets/css/login.css" />
   <link rel="stylesheet" href="assets/css/fonts.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
 </head>
 <body>
     <section class="container forms">
       <div class="outter_form_div login">
         <div class="form_details">
-          <h3>Login</h3>
+          <h3 class="pagefor">Login</h3>
           
           <?php 
             if(isset($error)){

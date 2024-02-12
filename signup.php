@@ -44,12 +44,13 @@ if(isset($_POST['submit'])){
   <!-- CSS Link -->
   <link rel="stylesheet" href="assets/css/signup.css" />
   <link rel="stylesheet" href="assets/css/fonts.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
 </head>
 <body>
 
   <div class="constiner_forms forms">
     <form action="" method="post">
-      <h3>Sign Up</h3>
+      <h3 class="pagefor">Sign Up</h3>
       
       <?php 
         if(isset($error)){
@@ -68,7 +69,7 @@ if(isset($_POST['submit'])){
       <input type="password" name="password" class="password" placeholder="Enter Password" required>
       
       <div class="items">
-        <input  type="password" name="compassword" class="password" placeholder="Enter Comfirm Password" required>
+        <input  type="password" name="compassword" class="password" placeholder="Re-Enter Comfirm Password" required>
         <i class='bx bx-hide hide_icone'></i>
       </div>
 
@@ -80,7 +81,7 @@ if(isset($_POST['submit'])){
       <input type="submit" name="submit" value="signup" class="button_div">
 
       <div class="form_link">
-        <span>Already have an account? <a href="login.php" class="link signup_link">Login</a></span>
+        <span>Already have an account? <a href="login.php" class="link signup_link"> Login</a></span>
       </div>
 
     </form>

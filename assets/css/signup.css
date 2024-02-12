@@ -77,10 +77,12 @@ form input:focus{
   color: #fff;
   cursor: pointer;
   transition: 0.5s linear;
+  text-transform: capitalize;
 }
 
 .constiner_forms form .button_div:hover{
   background-color: #1284e8;
+  text-transform: uppercase;
 }
 
 .form_link{
@@ -111,6 +113,7 @@ form input:focus{
   margin: 10px 0;
   padding: 8px;
   border-radius: 6px;
+  text-transform: capitalize;
 }
 
 
