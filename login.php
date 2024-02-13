@@ -18,6 +18,11 @@ if(isset($_POST['submit'])){
 
     if($row['user_type'] === 'admin'){
       $_SESSION['admin_nm'] = $row['fname'];
+      
+      echo " 
+        <script> 
+          alert('Successfull Login Admin Panel');
+        </script>";
       redirect('admin/admin.php');
       // echo"
       //   <script>
@@ -27,6 +32,10 @@ if(isset($_POST['submit'])){
       // header('location:admin/admin.php');
     }elseif($row['user_type'] === 'customer'){
       $_SESSION['cust_nm'] = $row['fname'];
+      echo " 
+        <script> 
+          alert('Successfull Login Customer Panel');
+        </script>";
       redirect('user/user.php');
       // echo"
       //   <script>
