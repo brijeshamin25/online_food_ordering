@@ -1,10 +1,12 @@
 <?php
 include('../database.php');
+include('../function.php');
 
 session_start();
 
 if(!isset($_SESSION['cust_nm'])){
-  header('location:login.php');
+  //header('location:login.php');
+  redirect('../login.php');
 }
 ?>
 

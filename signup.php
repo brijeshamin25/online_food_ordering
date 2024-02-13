@@ -1,5 +1,6 @@
 <?php
 include ('database.php');
+include('function.php');
 
 if(isset($_POST['submit'])){
   $fnm = mysqli_real_escape_string($con, $_POST['fname']);

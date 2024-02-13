@@ -9,4 +9,13 @@ function prx($arr){
   print_r($arr);
   die();
 }
+
+function redirect($page){
+  ?>
+  <script>
+    window.location.href='<?php echo $page?>';
+  </script>
+  <?php
+  die();
+}
 ?>

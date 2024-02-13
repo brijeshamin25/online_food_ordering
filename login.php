@@ -1,5 +1,6 @@
 <?php
-include ('database.php');
+include('database.php');
+include('function.php');
 
 session_start();
 
@@ -17,19 +18,21 @@ if(isset($_POST['submit'])){
 
     if($row['user_type'] === 'admin'){
       $_SESSION['admin_nm'] = $row['fname'];
-      echo"
-        <script>
-          alert('Admin Login Successfully...!');
-          window.location.href = 'admin/admin.php';
-        </script>";
+      redirect('admin/admin.php');
+      // echo"
+      //   <script>
+      //     alert('Admin Login Successfully...!');
+      //     window.location.href = 'admin/admin.php';
+      //   </script>";
       // header('location:admin/admin.php');
     }elseif($row['user_type'] === 'customer'){
       $_SESSION['cust_nm'] = $row['fname'];
-      echo"
-        <script>
-          alert('Customer Login Successfully...!');
-          window.location.href = 'user/user.php';
-        </script>";
+      redirect('user/user.php');
+      // echo"
+      //   <script>
+      //     alert('Customer Login Successfully...!');
+      //     window.location.href = 'user/user.php';
+      //   </script>";
       // header('location:../user/user.php');
     }
 
