@@ -1,19 +1,9 @@
 <?php 
 
 include('header.php');
-// include('../database.php');
-// include('../function.php');
 
-// session_start();
+?>
 
-// if(!isset($_SESSION['admin_nm'])){
-//   redirect('../login.php');
-//   //header('location:login.php');
-// }
-?>
-<?php
-include('footer.php');
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -26,11 +16,11 @@ include('footer.php');
   <link rel="stylesheet" href="assets/css/style.css">  
 </head>
 <body>
-
+  
   <div class="admin_container">
     <div class="content">
       <h3>Hi, <span>admin</span></h3>
-      <h1>Welcome <span> </span></h1>
+      <h1>Welcome </h1>
       <p>This is an Admin Panel</p>
       <a href="../login.php" class="btn">Login</a>
       <a href="../signup.php" class="btn">Signup</a>
@@ -38,5 +28,6 @@ include('footer.php');
     </div>
   </div>
 
+  <?php include('footer.php'); ?>
 </body>
 </html>

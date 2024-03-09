@@ -5,7 +5,7 @@ include('function.php');
 session_start();
 
 if(isset($_POST['submit'])){
-  $eml = mysqli_real_escape_string($con, $_POST['email']);
+  $eml = safe_valueto($_POST['email']);
   $pass = md5($_POST['password']);
   //$user_type = $_POST['user_type'];
 
@@ -36,7 +36,7 @@ if(isset($_POST['submit'])){
         <script> 
           alert('Successfull Login Customer Panel');
         </script>";
-      redirect('user/user.php');
+      redirect('index.php');
       // echo"
       //   <script>
       //     alert('Customer Login Successfully...!');

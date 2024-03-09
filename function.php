@@ -18,4 +18,10 @@ function redirect($page){
   <?php
   die();
 }
+
+function safe_valueto($val){
+  global $con;
+  $val = mysqli_real_escape_string($con, $val);
+  return $val;
+}
 ?>

@@ -1,0 +1,115 @@
+/* small mobile :320px. */
+
+@media (max-width: 767px) {
+  /* Signup Responsive */
+  .forms .pagefor{
+    font-size: 22px;
+   }
+ 
+   form input::placeholder,
+   .forms form select,
+   form select option{
+     font-size: 0.8rem;
+   }
+ 
+   form .items .bx-hide,
+   form .items .bx-show{
+     font-size: 15px;
+     top:18px;
+     right:8px;
+   }
+ 
+   .form_link span,
+   .form_link a{
+     font-size: 9px;
+   }
+ 
+   .constiner_forms form .err_msg{
+     font-size: 1rem;
+   }
+
+   /* Login Responsive */
+   .outter_form_div{
+    width:250px;
+   }
+
+   .form_details form .bx-hide,
+   .form_details form .bx-show{
+     font-size: 14px;
+     top:15px;
+     right:8px;
+   }
+
+   .form_details form input{
+    height: 45px;
+   }
+
+   .form_details form .button_div{
+    margin-top: 12px;
+    height: 40px;
+   }
+
+   .form_details form .form_link{
+    margin-top: 0px;
+   }
+
+   .form_details .err_msg{
+    font-size: 0.8rem;
+    height: 30px;
+    padding: 5px;
+  }
+}
+
+
+/* Large Mobile :480px. */
+
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+  
+}
+
+
+/* Tablet desktop :768px. */
+
+@media (min-width: 768px) and (max-width: 991px) {
+  /* Signup Responsive */
+  .forms .pagefor{
+    font-size: 28px;
+   }
+
+  form input::placeholder,
+  .forms form select,
+  form select option{
+    font-size: 0.9rem;
+  }
+
+  .form_link span,
+  .form_link a{
+     font-size: 11px;
+  }
+}
+
+
+/* Normal desktop :992px. */
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  /* Signup Responsive */
+  .form_link span,
+  .form_link a{
+     font-size: 13px;
+  }
+}
+
+
+/* large desktop :1366px. */
+
+@media (min-width: 1200px) and (max-width: 1500px) {
+  /* Signup Responsive */
+  .forms .pagefor{
+    font-size: 32px;
+   }
+
+  .form_link span,
+  .form_link a{
+     font-size: 14px;
+  }
+}

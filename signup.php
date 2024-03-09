@@ -3,9 +3,10 @@ include ('database.php');
 include('function.php');
 
 if(isset($_POST['submit'])){
-  $fnm = mysqli_real_escape_string($con, $_POST['fname']);
-  $lnm = mysqli_real_escape_string($con, $_POST['lname']);
-  $eml = mysqli_real_escape_string($con, $_POST['email']);
+  $fnm = safe_valueto($_POST['fname']);
+  $lnm = safe_valueto($_POST['lname']);
+  $eml = safe_valueto($_POST['email']);
+  $phn = safe_valueto($_POST['phone']);
   $pass = md5($_POST['password']);
   $cpass = md5($_POST['compassword']);
   $user_type = $_POST['user_type'];
@@ -20,7 +21,7 @@ if(isset($_POST['submit'])){
     if($pass != $cpass){
       $error[] = 'Password Not Matched!!';
     }else{
-      $sql_insert = "insert into reg_login(fname,lname,email,password,user_type) values('$fnm','$lnm','$eml','$pass','$user_type')";
+      $sql_insert = "insert into reg_login(fname,lname,email,phone_number,password,user_type) values('$fnm','$lnm','$eml','$phn','$pass','$user_type')";
       mysqli_query($con,$sql_insert);
       echo"
         <script>
@@ -66,9 +67,11 @@ if(isset($_POST['submit'])){
       <input type="text" name="lname" placeholder="Enter Last Name" required>
       
       <input type="email" name="email" placeholder="Enter Email" required>
+
+      <input type="number" name="phone" placeholder="Enter Phone Number" required>
       
       <input type="password" name="password" class="password" placeholder="Enter Password" required>
-      
+
       <div class="items">
         <input  type="password" name="compassword" class="password" placeholder="Re-Enter Comfirm Password" required>
         <i class='bx bx-hide hide_icone'></i>
