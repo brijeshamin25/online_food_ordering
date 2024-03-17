@@ -45,14 +45,6 @@ include('header.php');
                       <span id="email_error" class="errMsg"></span>
 
                       <div id="login_form_msg" class="succMsg"></div>
-                      <!-- <input type="text" name="user-name" placeholder="Username">
-                      <input type="password" name="user-password" placeholder="Password">
-                      <div class="button-box">
-                        <div class="login-toggle-btn">
-                          <a href="#">Forgot Password?</a>
-                        </div>
-                        <button type="submit"><span>Login</span></button>
-                      </div> -->
                     </form>
                   </div>
                 </div>
@@ -90,15 +82,6 @@ include('header.php');
 
                       <div id="signup_form_msg" class="succMsg"></div>
 
-                      <!-- <div class="form_link">
-                        <span>Already have an account? <a href="login.php" class="link signup_link"> Login</a></span>
-                      </div> -->
-                      <!-- <input type="text" name="user-name" placeholder="Username">
-                      <input type="password" name="user-password" placeholder="Password">
-                      <input name="user-email" placeholder="Email" type="email"> -->
-                      <!-- <div class="button-box">
-                        <button type="submit"><span>Register</span></button>
-                      </div> -->
                     </form>
                   </div>
                 </div>

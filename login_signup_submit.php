@@ -31,8 +31,18 @@ if ($sign_reg == 'register') {
     $cont_res = mysqli_query($con, $cont_ins_sql);
 
     $id = mysqli_insert_id($con);
-    $html=FRONTEND_SITE_PATH."email_verify.php?id=".$random_str;
-    send_email($email,$html,'Please Verify your E-mail id');
+    $html=FRONTEND_SITE_PATH."email_verify?id=".$random_str;
+    $email_sub = 'Please Verify your E-mail id';
+    $greet = 'Dear User';
+    $intro = 'Thank you for signing up with us!';
+    $link_msg = 'To complete the registration process and gain access to all our features, please verify your email address by clicking on the link below:
+      ' . $html . '';
+    $end_msg = 'If you did not sign up for an account with us, you can safely ignore this email.';
+    $thank = 'Best regards,
+    The EATERY Team';
+    $email_body = $greet. "\n\n" .$intro. "\n\n" .$link_msg. "\n\n" .$end_msg. "\n\n" .$thank;
+
+    send_email($email,$email_body,$email_sub);
 
     if ($cont_res) {
         echo json_encode(array('status' => 'success', 'msg' => 'Thank you, Please check your email to verify your account ✌️','field' => 'signup_form_msg'));

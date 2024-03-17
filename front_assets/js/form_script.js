@@ -4,7 +4,7 @@ jQuery('#formSignup').on('submit',function(e){
 	jQuery('#wait_msg').html('Please Wait!');
 	jQuery('.passMsg').html('');
   jQuery.ajax({
-    url:'login_signup_submit.php',
+    url:FRONTEND_SITE_PATH+'login_signup_submit',
     type:'post',
     data:jQuery('#formSignup').serialize(),
     success:function(result){
@@ -33,7 +33,7 @@ jQuery('#formLogin').on('submit',function(e){
 	jQuery('#login_submit_btn').attr('disabled',true);
 	jQuery('#login_form_msg').html('Please Wait!');
   jQuery.ajax({
-    url:'login_signup_submit.php',
+    url:FRONTEND_SITE_PATH+'login_signup_submit',
     type:'post',
     data:jQuery('#formLogin').serialize(),
     success:function(result){

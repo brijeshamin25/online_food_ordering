@@ -41,6 +41,7 @@
   <script src="<?php echo FRONTEND_SITE_PATH?>front_assets/js/main.js"></script>
   <script src="<?php echo FRONTEND_SITE_PATH?>front_assets/js/form_script.js"></script>
   <script src="<?php echo FRONTEND_SITE_PATH?>front_assets/js/script.js"></script>
+  <script> var FRONTEND_SITE_PATH = "<?php echo FRONTEND_SITE_PATH?>"; </script>
 
 </body>
 </html>
