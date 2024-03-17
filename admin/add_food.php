@@ -4,6 +4,7 @@ include("header.php");
 $id = "";
 $menu_id = "";
 $food_name = "";
+$food_type = "";
 $description = "";
 $images = "";
 $error_msg = "";
@@ -16,6 +17,7 @@ if(isset($_GET['food_id']) && $_GET['food_id'] > 0){
 
   $menu_id = $res['menu_id'];
   $food_name = $res['food_name'];
+  $food_type = $res['food_type'];
   $description = $res['description'];
   $images = $res['images'];
   $img_validation = '';
@@ -31,6 +33,7 @@ if(isset($_GET['food_item_id']) && $_GET['food_item_id']>0){
 if(isset($_POST["submit"])){
   $menu_id = safe_valueto($_POST["menu_id"]);
   $food_name = safe_valueto($_POST["food_name"]);
+  $food_type = safe_valueto($_POST["food_type"]);
   $description = safe_valueto($_POST["description"]);
 
   if($id === ''){
@@ -52,7 +55,7 @@ if(isset($_POST["submit"])){
         $images = rand(11111,99999).'_'.$_FILES['images']['name'];
         move_uploaded_file($_FILES['images']['tmp_name'],SERVER_FOOD_IMG_UPLOAD.$images);
 
-        $insert_sql = "insert into food(menu_id,food_name,description,images,food_status) values('$menu_id','$food_name','$description', '$images', 1)";
+        $insert_sql = "insert into food(menu_id,food_name,food_type,description,images,food_status) values('$menu_id','$food_name','$food_type','$description', '$images', 1)";
 
         $res = mysqli_query($con,$insert_sql);
 
@@ -86,7 +89,7 @@ if(isset($_POST["submit"])){
       }
       
       if($error == ''){
-        $update_sql = "update food set menu_id = '$menu_id', food_name = '$food_name', description = '$description' $img_constrain where food_id = '$id'";
+        $update_sql = "update food set menu_id = '$menu_id', food_name = '$food_name', food_type = '$food_type', description = '$description' $img_constrain where food_id = '$id'";
 
         $res = mysqli_query($con, $update_sql);
 
@@ -115,6 +118,8 @@ if(isset($_POST["submit"])){
 
 $option_menu_sql = "select * from menu where menu_status = '1' order by menu_name asc";
 $menu_res = mysqli_query($con, $option_menu_sql);
+
+$food_type_arr = array("Veg","Non-Veg");
 ?>
 
 <!DOCTYPE html>
@@ -153,6 +158,23 @@ $menu_res = mysqli_query($con, $option_menu_sql);
               <div class="form-group">
                 <label for="exampleInputEmail3">Food Name</label>
                 <input type="text" class="form-control" placeholder="Food Name" name="food_name" value="<?php echo $food_name ?>" required>
+              </div>
+
+              <div class="form-group">
+                <label for="exampleInputName1">Food Type: </label>
+                
+                <select name="food_type" class="form-control" required>
+                  <option value="">Select Food Type</option>
+                  <?php
+                    foreach ($food_type_arr as $list) {
+                      if($list === '$food_type'){
+                        echo "<option value='$list' selected>".strtoupper($list)."</option>";
+                      }else{
+                        echo "<option value='$list'>".strtoupper($list)."</option>";
+                      }
+                    }
+                  ?>
+                </select>
               </div>
 
               <div class="form-group">

@@ -3,9 +3,14 @@ include('database.php');
 include('function.php');
 
 session_start();
-session_unset();
-session_destroy();
 
-redirect('login.php');
+unset($_SESSION['USER_ID']);
+unset($_SESSION['USER_NAME']);
+// session_unset();
+// session_destroy();
+
+redirect('index.php');
+
+// redirect('login');
 //header('location:login.php');
 ?>

@@ -85,7 +85,7 @@ if(isset($_POST['submit'])){
       <input type="submit" name="submit" value="signup" class="button_div">
 
       <div class="form_link">
-        <span>Already have an account? <a href="login.php" class="link signup_link"> Login</a></span>
+        <span>Already have an account? <a href="<?php echo FRONTEND_SITE_PATH?>login" class="link signup_link"> Login</a></span>
       </div>
 
     </form>

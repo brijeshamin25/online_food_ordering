@@ -23,19 +23,26 @@ include('header.php');
 <body>
   <div class="slider-area">
     <div class="slider-active owl-dot-style owl-carousel">
-      <div class="single-slider pt-210 pb-220 bg-img" style="background-image:url(front_assets/img/slider/banner5.jpg);">
+      <?php
+        $slid_sel_sql = "select * from slider where slider_status = '1' order by slider_stack";
+        $slid_res = mysqli_query($con,$slid_sel_sql);
+        while($slid_row = mysqli_fetch_assoc($slid_res)){ ?>        
+      <div class="single-slider pt-210 pb-220 bg-img" style="background-image:url(<?php echo SITE_SLIDER_IMG_CALL.$slid_row['image'] ?>);">
         <div class="container">
           <div class="slider-content slider-animated-1">
-            <h1 class="animated">Cooked with Care, Served with Love</h1>
-            <h3 class="animated">Fresh Healthy and Organic.</h3>
+            <h1 class="animated"><?php echo $slid_row['heading']?></h1>
+            <h3 class="animated"><?php echo $slid_row['sub_heading'] ?></h3>
             <div class="slider-btn mt-90">
-              <a class="animated" href="main.php">Order Now</a>
+              <a class="animated" href="<?php echo $slid_row['link'] ?>"><?php echo $slid_row['link_text'] ?></a>
             </div>
           </div>
         </div>
       </div>
+      <?php
+        } 
+      ?>
 
-      <div class="single-slider pt-210 pb-220 bg-img" style="background-image:url(front_assets/img/slider/banner2.jpg);">
+      <!-- <div class="single-slider pt-210 pb-220 bg-img" style="background-image:url(front_assets/img/slider/banner2.jpg);">
         <div class="container">
           <div class="slider-content slider-animated-1">
             <h1 class="animated">Cooked with Care, Served with Love</h1>
@@ -81,7 +88,7 @@ include('header.php');
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>      
 </body>

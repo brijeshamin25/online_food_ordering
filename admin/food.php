@@ -66,7 +66,7 @@ $res=mysqli_query($con, $join_sql);
                 <tr>
                   <td><?php echo $i ?></td>
                   <td><?php echo $row['menu_name'] ?></td>
-                  <td><?php echo $row['food_name'] ?></td>
+                  <td><?php echo $row['food_name'] ?> (<?php echo strtoupper($row['food_type']) ?>)</td>
                   <td><a target="_blank" href="<?php echo SITE_FOOD_IMG_CALL.$row['images'] ?>"> <img class="hover_eff" src="<?php echo SITE_FOOD_IMG_CALL.$row['images'] ?>"></a></td>
 
                   <td>

@@ -30,14 +30,17 @@
     </div>
   </div>
         
-  <script src="front_assets/js/vendor/jquery-1.12.0.min.js"></script>
-  <script src="front_assets/js/popper.js"></script>
-  <script src="front_assets/js/bootstrap.min.js"></script>
-  <script src="front_assets/js/imagesloaded.pkgd.min.js"></script>
-  <script src="front_assets/js/isotope.pkgd.min.js"></script>
-  <script src="front_assets/js/ajax-mail.js"></script>
-  <script src="front_assets/js/owl.carousel.min.js"></script>
-  <script src="front_assets/js/plugins.js"></script>
-  <script src="front_assets/js/main.js"></script>
+  <script src="<?php echo FRONTEND_SITE_PATH?>front_assets/js/vendor/jquery-1.12.0.min.js"></script>
+  <script src="<?php echo FRONTEND_SITE_PATH?>front_assets/js/popper.js"></script>
+  <script src="<?php echo FRONTEND_SITE_PATH?>front_assets/js/bootstrap.min.js"></script>
+  <script src="<?php echo FRONTEND_SITE_PATH?>front_assets/js/imagesloaded.pkgd.min.js"></script>
+  <script src="<?php echo FRONTEND_SITE_PATH?>front_assets/js/isotope.pkgd.min.js"></script>
+  <script src="<?php echo FRONTEND_SITE_PATH?>front_assets/js/ajax_form_submit.js"></script>
+  <script src="<?php echo FRONTEND_SITE_PATH?>front_assets/js/owl.carousel.min.js"></script>
+  <script src="<?php echo FRONTEND_SITE_PATH?>front_assets/js/plugins.js"></script>
+  <script src="<?php echo FRONTEND_SITE_PATH?>front_assets/js/main.js"></script>
+  <script src="<?php echo FRONTEND_SITE_PATH?>front_assets/js/form_script.js"></script>
+  <script src="<?php echo FRONTEND_SITE_PATH?>front_assets/js/script.js"></script>
+
 </body>
 </html>

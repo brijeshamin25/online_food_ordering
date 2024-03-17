@@ -16,19 +16,20 @@ session_start();
 
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
-  <link rel="stylesheet" href="front_assets/css/bootstrap.min.css">
-  <link rel="stylesheet" href="front_assets/css/animate.css">
-  <link rel="stylesheet" href="front_assets/css/owl.carousel.min.css">
-  <link rel="stylesheet" href="front_assets/css/slick.css">
-  <link rel="stylesheet" href="front_assets/css/chosen.min.css">
-  <link rel="stylesheet" href="front_assets/css/ionicons.min.css">
-  <link rel="stylesheet" href="front_assets/css/font-awesome.min.css">
-  <link rel="stylesheet" href="front_assets/css/simple-line-icons.css">
-  <link rel="stylesheet" href="front_assets/css/jquery-ui.css">
-  <link rel="stylesheet" href="front_assets/css/meanmenu.min.css">
-  <link rel="stylesheet" href="front_assets/css/style.css">
-  <link rel="stylesheet" href="front_assets/css/responsive.css">
-  <script src="front_assets/js/vendor/modernizr-2.8.3.min.js"></script>
+  <link rel="stylesheet" href="<?php echo FRONTEND_SITE_PATH?>front_assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="<?php echo FRONTEND_SITE_PATH?>front_assets/css/animate.css">
+  <link rel="stylesheet" href="<?php echo FRONTEND_SITE_PATH?>front_assets/css/owl.carousel.min.css">
+  <link rel="stylesheet" href="<?php echo FRONTEND_SITE_PATH?>front_assets/css/slick.css">
+  <link rel="stylesheet" href="<?php echo FRONTEND_SITE_PATH?>front_assets/css/chosen.min.css">
+  <link rel="stylesheet" href="<?php echo FRONTEND_SITE_PATH?>front_assets/css/ionicons.min.css">
+  <link rel="stylesheet" href="<?php echo FRONTEND_SITE_PATH?>front_assets/css/font-awesome.min.css">
+  <link rel="stylesheet" href="<?php echo FRONTEND_SITE_PATH?>front_assets/css/simple-line-icons.css">
+  <link rel="stylesheet" href="<?php echo FRONTEND_SITE_PATH?>front_assets/css/jquery-ui.css">
+  <link rel="stylesheet" href="<?php echo FRONTEND_SITE_PATH?>front_assets/css/meanmenu.min.css">
+  <link rel="stylesheet" href="<?php echo FRONTEND_SITE_PATH?>front_assets/css/style.css">
+  <link rel="stylesheet" href="<?php echo FRONTEND_SITE_PATH?>front_assets/css/signup.css">
+  <link rel="stylesheet" href="<?php echo FRONTEND_SITE_PATH?>front_assets/css/responsive.css">
+  <script src="<?php echo FRONTEND_SITE_PATH?>front_assets/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 <body>
   <header class="header-area">
@@ -37,13 +38,20 @@ session_start();
         <div class="row">
           <div class="col-lg-4 col-md-4 col-12 col-sm-4">
             <div class="welcome-area">
-              <p>Welcome to Brijesh Restaurant </p>
+              <p>Welcome to The Eatery Restaurant </p>
             </div>
           </div>
           <div class="col-lg-8 col-md-8 col-12 col-sm-8">
             <div class="account-curr-lang-wrap f-right">
+            <?php
+                if(isset($_SESSION['USER_NAME'])){
+              ?>
               <ul>
-                <li class="top-hover"><a href="#">Setting  <i class="ion-chevron-down"></i> </a>
+                <li class="top-hover"><a href="#"><?php 
+                        echo "Welcome ".$_SESSION['USER_NAME'];
+                    ?>
+                    <i class='bx bxs-chevron-down down_arr'></i> 
+                  <!-- <i class="down-icon ion-chevron-down"></i> </a> -->
                   <ul>
                     <li><a href="profile.php">My Account</a></li>
                     <li><a href="order_history.php">Order History</a></li>
@@ -51,6 +59,9 @@ session_start();
                   </ul>
                 </li>
               </ul>
+              <?php 
+                }
+              ?>
             </div>
           </div>
         </div>
@@ -62,15 +73,18 @@ session_start();
         <div class="row">
           <div class="col-lg-3 col-md-4 col-12 col-sm-4">
             <div class="logo">
-              <a href="index.html">
-                <img alt="" src="assets/img/logo/logo.png">
+              <a href="<?php echo FRONTEND_SITE_PATH?>index">
+                <img alt="" src="<?php echo FRONTEND_SITE_PATH?>front_assets/img/brand-logo/the-eatery.svg">
               </a>
             </div>
           </div>
           <div class="col-lg-9 col-md-8 col-12 col-sm-8">
             <div class="header-middle-right f-right">
               <div class="header-login">
-                <a href="login.php">
+              <?php 
+                if(!isset($_SESSION['USER_NAME'])){ 
+              ?>
+                <a href="<?php echo FRONTEND_SITE_PATH?>login_signup">
                   <div class="header-icon-style">
                     <i class="icon-user icons"></i>
                   </div>
@@ -78,12 +92,15 @@ session_start();
                     <p>Register <br> or <span>Sign in</span></p>
                   </div>
                 </a>
+              <?php 
+                }
+              ?>
               </div>
               <div class="header-wishlist">
                 &nbsp;
               </div>
               <div class="header-cart">
-                <a href="#">
+                <a href="<?php echo FRONTEND_SITE_PATH?>cart">
                   <div class="header-icon-style">
                     <i class="icon-handbag icons"></i>
                     <span class="count-style">0</span>
@@ -107,9 +124,9 @@ session_start();
             <div class="main-menu">
               <nav>
                 <ul>
-                  <li><a href="main.php">Home</a></li>
-                  <li><a href="about_us.php">About Us</a></li>
-                  <li><a href="contact_us.php">Contact Us</a></li>
+                  <li><a href="<?php echo FRONTEND_SITE_PATH?>main">Home</a></li>
+                  <li><a href="<?php echo FRONTEND_SITE_PATH?>about_us">About Us</a></li>
+                  <li><a href="<?php echo FRONTEND_SITE_PATH?>contact_us">Contact Us</a></li>
                 </ul>
               </nav>
             </div>
@@ -125,9 +142,9 @@ session_start();
             <div class="mobile-menu">
               <nav id="mobile-menu-active">
                 <ul class="menu-overflow" id="nav">
-                  <li><a href="main.php">Home</a></li>
-                  <li><a href="about_us.php">About Us</a></li>
-                  <li><a href="contact_us.php">Contact Us</a></li>
+                  <li><a href="<?php echo FRONTEND_SITE_PATH?>main">Home</a></li>
+                  <li><a href="<?php echo FRONTEND_SITE_PATH?>about_us">About Us</a></li>
+                  <li><a href="<?php echo FRONTEND_SITE_PATH?>contact_us">Contact Us</a></li>
                 </ul>
               </nav>
             </div>

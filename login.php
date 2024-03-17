@@ -23,7 +23,7 @@ if(isset($_POST['submit'])){
         <script> 
           alert('Successfull Login Admin Panel');
         </script>";
-      redirect('admin/admin.php');
+      redirect('admin/admin');
       // echo"
       //   <script>
       //     alert('Admin Login Successfully...!');
@@ -36,7 +36,7 @@ if(isset($_POST['submit'])){
         <script> 
           alert('Successfull Login Customer Panel');
         </script>";
-      redirect('index.php');
+      redirect('index');
       // echo"
       //   <script>
       //     alert('Customer Login Successfully...!');
@@ -93,7 +93,7 @@ if(isset($_POST['submit'])){
             <input type="submit" name="submit" value="Login" class="items button_div">
 
             <div class="form_link">
-              <span>Don't have an account? <a href="signup.php" class="link signup_link">Signup</a></span>
+              <span>Don't have an account? <a href="<?php echo FRONTEND_SITE_PATH?>signup" class="link signup_link">Signup</a></span>
             </div>
           </form>
 

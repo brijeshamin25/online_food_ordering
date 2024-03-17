@@ -26,6 +26,12 @@ if($path == '' || $path == 'admin.php'){
   $title = 'Manage Food';
 }elseif($path == 'customer.php'){
   $title = 'Users';
+}elseif($path == 'slider.php'){
+  $title = 'Slider';
+}elseif($path == 'add_slider.php'){
+  $title = 'Manage Slider';
+}elseif($path == 'contact_us.php'){
+  $title = 'Contact Us';
 }
 
 ?>
@@ -68,8 +74,8 @@ if($path == '' || $path == 'admin.php'){
         </ul>
 
         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-          <a class="navbar-brand brand-logo" href="admin.php"><img src="assets/images/logo.png" alt="logo"/></a>
-          <a class="navbar-brand brand-logo-mini" href="#"><img src="assets/images/logo.png" alt="logo"/></a>
+          <a class="navbar-brand brand-logo" href="admin.php"><img src="assets/images/the-eatery.svg" alt="logo"/></a>
+          <a class="navbar-brand brand-logo-mini" href="#"><img src="assets/images/the-eatery.svg" alt="logo"/></a>
         </div>
 
         <ul class="navbar-nav navbar-nav-right">  
@@ -130,18 +136,25 @@ if($path == '' || $path == 'admin.php'){
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="#">
-              <i class='bx bx-notepad menu-icon'></i>
-              <span class="menu-title">Order</span>
+            <a class="nav-link" href="slider.php">
+              <i class='bx bxs-image menu-icon' ></i>
+              <span class="menu-title">Slider</span>
             </a>
           </li>
-		  
-		      <li class="nav-item">
-            <a class="nav-link" href="#">
+
+          <li class="nav-item">
+            <a class="nav-link" href="contact_us.php">
               <i class='bx bxs-contact menu-icon'></i>
               <span class="menu-title">Contact Us</span>
             </a>
           </li>
+
+          <!-- <li class="nav-item">
+            <a class="nav-link" href="#">
+              <i class='bx bx-notepad menu-icon'></i>
+              <span class="menu-title">Order</span>
+            </a>
+          </li> --> 
           
         </ul>
       </nav>
