@@ -4,6 +4,8 @@ include('function.php');
 include('default.php');
 
 session_start();
+
+$cartArry = get_cart_detail();
 ?>
 
 <!doctype html>

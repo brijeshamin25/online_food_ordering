@@ -26,8 +26,6 @@ jQuery('#formSignup').on('submit',function(e){
   e.preventDefault();
 });
 
-
-
 jQuery('#formLogin').on('submit',function(e){
 	jQuery('.errMsg').html('');
 	jQuery('#login_submit_btn').attr('disabled',true);
@@ -53,3 +51,42 @@ jQuery('#formLogin').on('submit',function(e){
   });
   e.preventDefault();
 });
+
+function click_chkbox(id){
+	var mnu_itm = jQuery('#mnu_itm').val();
+	var verify = mnu_itm.search(" : "+ id);
+	if(verify != '-1'){
+		mnu_itm = mnu_itm.replace(" : "+ id,'');
+	}else{
+		mnu_itm = mnu_itm+" : "+ id;
+	} 
+	jQuery('#mnu_itm').val(mnu_itm);
+	jQuery('#menuItm')[0].submit();
+}
+
+function setFoodType(food_type){
+	jQuery('#food_type').val(food_type);
+	jQuery('#menuItm')[0].submit();
+}
+
+function add_to_cart(id,cart_type){
+	var qty =jQuery('#qty'+id).val();
+	var attr =jQuery('input[name="radio'+id+'"]:checked').val();
+	var is_attr_checked= '';
+	if(typeof attr === 'undefined'){
+		is_attr_checked = 'no';
+	}
+	if(qty > 0 && is_attr_checked != 'no'){
+		jQuery.ajax({
+			url:FRONTEND_SITE_PATH+'added_to_cart',
+			type:'post',
+			data:'qty='+qty+'&attr='+attr+'&cart_type='+cart_type,
+			success:function(result){
+				swal("Congratulation!", "Food Item added successfully", "success");
+				jQuery('#cart_qty_add_msg_'+attr).html('(Added - '+qty+')');
+			}
+		});
+	}else{
+		swal("Error!", "Please Select Food Attribute and Quantity", "error");
+	}
+}

@@ -71,6 +71,12 @@ if ($sign_reg == 'login_msg') {
           $_SESSION['USER_ID']=$row['cust_id'];
           $_SESSION['USER_NAME']=$row['fname'];
           $arr = array('status' => 'success', 'msg' => '');
+
+          if(isset($_SESSION['cart']) && count($_SESSION['cart']) > 0){
+            foreach($_SESSION['cart'] as $key => $val){
+              manage_cart($_SESSION['USER_ID'],$val['qty'],$key);
+            }
+          }
         }else{
           $arr = array('status' => 'error', 'msg' => 'Please enter Correct Password... 👀');
         }

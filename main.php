@@ -103,13 +103,30 @@ $fd_ty_arr = array('veg','non-veg','both');
                         <div class="product-price-wrapper">
                           <?php 
                             while ($fd_att_row = mysqli_fetch_assoc($fd_att_sel_res)) {
-                              echo "<div class='att_prs'> <input type='radio' class='radioBtn'/>";
+                              echo "<div class='att_prs'> <input type='radio' class='radioBtn' name='radio".$fd_row['food_id']."' id='radio".$fd_row['food_id']."' value='".$fd_att_row['food_item_id']."'/>";
                               echo '<span class="attr">'.$fd_att_row["food_attribute"].'</span>';
                               echo '<span class="prs">($'.$fd_att_row["price"].')</span>';
+
+                              $added_msg="";
+                              if(array_key_exists($fd_att_row["food_item_id"],$cartArry)){
+                                $added_qty = get_cart_detail($fd_att_row["food_item_id"]);
+                                $added_msg ="(Added - $added_qty)";
+                              }
+                              echo " <span class='cart_added_txt' id='cart_qty_add_msg_".$fd_att_row["food_item_id"]."'>".$added_msg."</span>";
                               echo "</div>";
                             }
                           ?>
-                          <!-- <span>$100.00</span> -->
+                        </div>
+                        <div class="pro_qty_wrapper">
+                          <select class="qty_dropdown" id="qty<?php echo $fd_row['food_id']?>">
+                            <option value="0">Qty</option>
+                            <?php 
+                              for($i = 1; $i <= 10; $i++){
+                                echo "<option>$i</option>";
+                              }
+                            ?>
+                          </select>
+                          <i class='bx bxs-cart-add add_car_icon' onclick="add_to_cart('<?php echo $fd_row['food_id']?>','add')"></i>
                         </div>
                       </div>
                     </div>
@@ -138,19 +155,19 @@ $fd_ty_arr = array('veg','non-veg','both');
                 <ul id="faq" class="menu_list">
                 <li><a href="<?php echo FRONTEND_SITE_PATH?>main">Clear</a></li>
                 <?php
-                    while ($mnu_row = mysqli_fetch_assoc($mnu_res)){
-                      $cls = "selected"; 
-                      if($menu_id == $mnu_row['menu_id']){
-                        $cls = 'active';
-                      }
-                      $selected = '';
-                      if(in_array($mnu_row['menu_id'],$mnu_itm_arry)){
-                        $selected = "checked='checked'";
-                      }
-
-                      echo "<li> <input type='checkbox' $selected onclick=click_chkbox('".$mnu_row['menu_id']."') class='mnu_chkbox' name='mnu_arry[]' value='".$mnu_row['menu_id']."'> ".$mnu_row['menu_name']."</li>";  
+                  while ($mnu_row = mysqli_fetch_assoc($mnu_res)){
+                    $cls = "selected"; 
+                    if($menu_id == $mnu_row['menu_id']){
+                      $cls = 'active';
                     }
-                  ?>
+                    $selected = '';
+                    if(in_array($mnu_row['menu_id'],$mnu_itm_arry)){
+                      $selected = "checked='checked'";
+                    }
+
+                    echo "<li> <input type='checkbox' $selected onclick=click_chkbox('".$mnu_row['menu_id']."') class='mnu_chkbox' name='mnu_arry[]' value='".$mnu_row['menu_id']."'> ".$mnu_row['menu_name']."</li>";  
+                  }
+                ?>
                 </ul>
               </div>
             </div>
@@ -163,24 +180,6 @@ $fd_ty_arr = array('veg','non-veg','both');
     <input type="hidden" name="mnu_itm" id="mnu_itm" value="<?php echo $mnu_itm ?>">
     <input type="hidden" name="food_type" id="food_type" value="<?php echo $food_type ?>">
   </form>
-  <script>
-    function click_chkbox(id){
-      var mnu_itm = jQuery('#mnu_itm').val();
-      var verify = mnu_itm.search(" : "+ id);
-      if(verify != '-1'){
-        mnu_itm = mnu_itm.replace(" : "+ id,'');
-      }else{
-        mnu_itm = mnu_itm+" : "+ id;
-      } 
-      jQuery('#mnu_itm').val(mnu_itm);
-      jQuery('#menuItm')[0].submit();
-    }
-
-    function setFoodType(food_type){
-      jQuery('#food_type').val(food_type);
-      jQuery('#menuItm')[0].submit();
-    }
-  </script>
 </body>
 </html>
 

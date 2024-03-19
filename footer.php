@@ -19,9 +19,6 @@
                 <li><a href="#"><i class="ion-social-facebook"></i></a></li>
                 <li><a href="#"><i class="ion-social-twitter"></i></a></li>
                 <li><a href="#"><i class="ion-social-instagram-outline"></i></a></li>
-                <!-- <li><a href="#"><i class="ion-social-googleplus-outline"></i></a></li>
-                <li><a href="#"><i class="ion-social-rss"></i></a></li>
-                <li><a href="#"><i class="ion-social-dribbble-outline"></i></a></li> -->
               </ul> 
             </div>
           </div>
@@ -41,6 +38,7 @@
   <script src="<?php echo FRONTEND_SITE_PATH?>front_assets/js/main.js"></script>
   <script src="<?php echo FRONTEND_SITE_PATH?>front_assets/js/form_script.js"></script>
   <script src="<?php echo FRONTEND_SITE_PATH?>front_assets/js/script.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <script> var FRONTEND_SITE_PATH = "<?php echo FRONTEND_SITE_PATH?>"; </script>
 
 </body>
