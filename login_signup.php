@@ -41,6 +41,7 @@ include('header.php');
                       </div>
 
                       <input type="hidden" name="sign_reg" value="login_msg"/>
+                      <input type="hidden" name="is_checkout" id="is_checkout" value=""/>
 
                       <span id="email_error" class="errMsg"></span>
 

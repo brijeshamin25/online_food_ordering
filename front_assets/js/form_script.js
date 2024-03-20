@@ -43,9 +43,12 @@ jQuery('#formLogin').on('submit',function(e){
 			if(data.status=='error'){
 				jQuery('#email_error').html(data.msg);
 			}
-      if(data.status=='success'){
+			var is_checkout = jQuery('#is_checkout').val();
+			if(is_checkout == 'yes'){
+        window.location.href='checkout';
+			}else if(data.status=='success'){
 				// jQuery('#login_form_msg').html(data.msg);
-        window.location.href='index.php';
+        window.location.href='main';
 			}
     }
   });
@@ -91,11 +94,11 @@ function add_to_cart(id,cart_type){
 
 				if(data.totalFoodAdded == 1){
 					var total = qty * data.price;
-					var html = '<div class="shopping-cart-content"><ul id="cart_ul"><li class="single-shopping-cart" id="attr_'+attr+'"><div class="shopping-cart-img"><a href="javascript:void(0)"><img alt="" src="'+SITE_FOOD_IMG_CALL+data.images+'"></a></div><div class="shopping-cart-title"><h4><a href="javascript:void(0)">'+data.food_name+' </a></h4><h6>Qty: '+qty+'</h6><span>$ '+total+'</span></div><div class="shopping-cart-delete"><a href="javascript:void(0)" onclick="delete_cart("'+attr+'")><i class="ion ion-close"></i></a></div></li></ul><h4>Total : <span class="shop-total">$ '+total+'</span></h4><div class="shopping-cart-btn"><a href="cart">view cart</a><a href="checkout">checkout</a></div></div>';
+					var html = '<div class="shopping-cart-content"><ul id="cart_ul"><li class="single-shopping-cart" id="attr_'+attr+'"><div class="shopping-cart-img"><a href="javascript:void(0)"><img alt="" src="'+SITE_FOOD_IMG_CALL+data.images+'"></a></div><div class="shopping-cart-title"><h4><a href="javascript:void(0)">'+data.food_name+' </a></h4><h6>Qty: '+qty+'</h6><span>$ '+number_format(total,2)+'</span></div><div class="shopping-cart-delete"><a href="javascript:void(0)" onclick="delete_cart("'+attr+'")><i class="ion ion-close"></i></a></div></li></ul><h4>Total : <span class="shop-total">$ '+number_format(total,2)+'</span></h4><div class="shopping-cart-btn"><a href="<?php echo FRONTEND_SITE_PATH?>cart">view cart</a><a href="checkout">checkout</a></div></div>';
 					jQuery('.header-cart').append(html);
 				}else{
 					var total = qty * data.price;
-					var html = '<li class="single-shopping-cart" id="attr_'+attr+'"><div class="shopping-cart-img"><a href="javascript:void(0)"><img alt="" src="'+SITE_FOOD_IMG_CALL+data.images+'"></a></div><div class="shopping-cart-title"><h4><a href="javascript:void(0)">'+data.food_name+' </a></h4><h6>Qty: '+qty+'</h6><span>$ '+total+'</span></div><div class="shopping-cart-delete"><a href="javascript:void(0)" onclick="delete_cart("'+attr+'")><i class="ion ion-close"></i></a></div></li>';
+					var html = '<li class="single-shopping-cart" id="attr_'+attr+'"><div class="shopping-cart-img"><a href="javascript:void(0)"><img alt="" src="'+SITE_FOOD_IMG_CALL+data.images+'"></a></div><div class="shopping-cart-title"><h4><a href="javascript:void(0)">'+data.food_name+' </a></h4><h6>Qty: '+qty+'</h6><span>$ '+number_format(total,2)+'</span></div><div class="shopping-cart-delete"><a href="javascript:void(0)" onclick="delete_cart("'+attr+'")><i class="ion ion-close"></i></a></div></li>';
 					jQuery('#cart_ul').append(html);
 					jQuery('.shop-total').html(totalPrs);
 				}
@@ -106,27 +109,88 @@ function add_to_cart(id,cart_type){
 	}
 }
 
-function delete_cart(id){
+function number_format(number, decimals) {
+	return number.toFixed(decimals);
+}
+
+
+function delete_cart(id,is_type){
 	jQuery.ajax({
 		url:FRONTEND_SITE_PATH+'added_to_cart',
 		type:'post',
 		data:'&attr='+id+'&cart_type=delete',
 		success:function(result){
-			var data = jQuery.parseJSON(result);
-			// swal("Congratulation!", "Food Item added successfully", "success");
-			// jQuery('#cart_qty_add_msg_'+attr).html('(Added - '+qty+')');
-			jQuery('#totalFoodAdded').html(data.totalFoodAdded);
-			jQuery('#cart_qty_add_msg_'+id).html('');
-
-			if(data.totalFoodAdded == 0){
-				jQuery('.shopping-cart-content').remove();
-				jQuery('#totalPrice').html('');
+			if(is_type == 'load'){
+				window.location.href=window.location.href;
 			}else{
-				var totalPrs = data.totalPrice;
-				jQuery('.shop-total').html(totalPrs);
-				jQuery('#attr_'+id).remove();
-				jQuery('#totalPrice').html('$ '+data.totalPrice);
+				var data = jQuery.parseJSON(result);
+				// swal("Congratulation!", "Food Item added successfully", "success");
+				// jQuery('#cart_qty_add_msg_'+attr).html('(Added - '+qty+')');
+				jQuery('#totalFoodAdded').html(data.totalFoodAdded);
+				jQuery('#cart_qty_add_msg_'+id).html('');
+
+				if(data.totalFoodAdded == 0){
+					jQuery('.shopping-cart-content').remove();
+					jQuery('#totalPrice').html('');
+				}else{
+					var totalPrs = data.totalPrice;
+					jQuery('.shop-total').html(totalPrs);
+					jQuery('#attr_'+id).remove();
+					jQuery('#totalPrice').html('$ '+data.totalPrice);
+				}
 			}
 		}
 	});
 }
+
+function viewCart(){
+	window.location.href ='cart.php';
+}
+
+function checkout(){
+	window.location.href ='checkout.php';
+}
+
+jQuery('#fromProfile').on('submit',function(e){
+	jQuery('#profile_btn').attr('disabled',true);
+	jQuery('#form_msg').html('Please Wait!');
+  jQuery.ajax({
+    url:FRONTEND_SITE_PATH+'update_profile',
+    type:'post',
+    data:jQuery('#fromProfile').serialize(),
+    success:function(result){
+      // console.log(result);
+      jQuery('#form_msg').html('');
+			jQuery('#profile_btn').attr('disabled',false);
+      var data = JSON.parse(result);
+      if(data.status=='success'){
+				jQuery('#cst_header_name').html(jQuery('#cst_fname').val());
+				swal("Profile", data.msg, "success");
+			}
+    }
+  });
+  e.preventDefault();
+});
+
+jQuery('#formPassword').on('submit',function(e){
+	jQuery('#password_btn').attr('disabled',true);
+	jQuery('#password_form_msg').html('Please Wait!');
+  jQuery.ajax({
+    url:FRONTEND_SITE_PATH+'update_profile',
+    type:'post',
+    data:jQuery('#formPassword').serialize(),
+    success:function(result){
+      //console.log(result);
+      jQuery('#password_form_msg').html('');
+			jQuery('#password_btn').attr('disabled',false);
+      var data = JSON.parse(result);
+      if(data.status=='success'){
+				swal("Password", data.msg, "success");
+			}
+			if(data.status=='error'){
+				swal("Error", data.msg, "error");
+			}
+    }
+  });
+  e.preventDefault();
+});

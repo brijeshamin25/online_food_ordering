@@ -6,6 +6,28 @@ include('default.php');
 session_start();
 
 $totalPrice = 0;
+
+if(isset($_POST['update_cart'])){
+  foreach($_POST['qty'] as $key=> $val){
+    if(isset($_SESSION['USER_ID'])){
+      if($val[0] == 0){
+        $added_cart_del_sql = "delete from food_cart where food_item_id='$key' and customer_id=".$_SESSION['USER_ID'];
+        $added_cart_del_res = mysqli_query($con,$added_cart_del_sql);
+      }else{
+        $added_cart_upd_sql = "update food_cart set 	food_qty='".$val[0]."' where food_item_id='$key' and customer_id=".$_SESSION['USER_ID'];
+        $added_cart_upd_res = mysqli_query($con,$added_cart_upd_sql);
+      }
+      
+    }else{
+      if($val[0] == 0){
+        unset($_SESSION['cart'][$key]['qty']);
+      }else{
+        $_SESSION['cart'][$key]['qty']=$val[0];
+      }
+    }
+  }
+}
+
 $cartArry = get_cart_detail();
 
 //prx($cartArry);
@@ -59,8 +81,8 @@ $totalFoodAdded = count($cartArry);
               ?>
               <ul>
                 <li class="top-hover"><a href="#"><?php 
-                        echo "Welcome ".$_SESSION['USER_NAME'];
-                    ?>
+                        echo "Welcome <span id='cst_header_name'>".$_SESSION['USER_NAME'];
+                    ?></span>
                     <i class='bx bxs-chevron-down down_arr'></i> 
                   <!-- <i class="down-icon ion-chevron-down"></i> </a> -->
                   <ul>
@@ -138,7 +160,7 @@ $totalFoodAdded = count($cartArry);
                           <div class="shopping-cart-title">
                             <h4><a href="javascript:void(0)"> <?php echo $list['name']?> </a></h4>
                             <h6>Qty: <?php echo $list['food_qty']?> </h6>
-                            <span> $ <?php echo $list['food_qty']*$list['price']; ?> </span>
+                            <span> $ <?php echo number_format($list['food_qty']*$list['price'],2); ?> </span>
                           </div>
                           <div class="shopping-cart-delete">
                             <a href="javascript:void(0)" onclick="delete_cart('<?php echo $key?>')"><i class="ion ion-close"></i></a>
@@ -147,11 +169,14 @@ $totalFoodAdded = count($cartArry);
                       <?php } ?>
                     </ul>
                     <div class="shopping-cart-total">
-                      <h4>Total : <span class="shop-total">$ <?php echo $totalPrice ?></span></h4>
+                      <h4>Total : <span class="shop-total">$ <?php echo number_format($totalPrice,2) ?></span></h4>
+                    </div>
+                    <div>
+                      <a href="cart.php"></a>
                     </div>
                     <div class="shopping-cart-btn">
-                    <a href="<?php echo FRONTEND_SITE_PATH?>cart">view cart</a>
-                      <a href="<?php echo FRONTEND_SITE_PATH?>checkout">checkout</a>
+                      <button onclick="viewCart()" class="add_to_cart_btn">View Cart</button>
+                      <button onclick="checkout()" class="add_to_cart_btn">Checkout</button>
                     </div>
                   </div>
                 <?php 

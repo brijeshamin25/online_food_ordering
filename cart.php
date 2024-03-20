@@ -13,8 +13,13 @@ include('header.php');
       <h3 class="page-title">Your cart items</h3>
       <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-          <form action="#">
+          <form method="post" class="empty_msg">
+            <?php 
+              $cartArry = get_cart_detail();
+              if(count($cartArry) > 0 ){
+            ?>
             <div class="table-content table-responsive">
+              
               <table>
                 <thead>
                   <tr>
@@ -27,57 +32,27 @@ include('header.php');
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td class="product-thumbnail">
-                      <a href="#"><img src="front_assets/img/cart/cart-3.jpg" alt=""></a>
-                    </td>
-                    <td class="product-name"><a href="#">PRODUCTS NAME HERE </a></td>
-                    <td class="product-price-cart"><span class="amount">$260.00</span></td>
-                    <td class="product-quantity">
-                      <div class="cart-plus-minus">
-                        <input class="cart-plus-minus-box" type="text" name="qtybutton" value="2">
-                      </div>
-                    </td>
-                    <td class="product-subtotal">$110.00</td>
-                    <td class="product-remove">
-                      <a href="#"><i class="fa fa-pencil"></i></a>
-                      <a href="#"><i class="fa fa-times"></i></a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="product-thumbnail">
-                      <a href="#"><img src="front_assets/img/cart/cart-4.jpg" alt=""></a>
-                    </td>
-                    <td class="product-name"><a href="#">PRODUCTS NAME HERE </a></td>
-                    <td class="product-price-cart"><span class="amount">$150.00</span></td>
-                    <td class="product-quantity">
-                      <div class="cart-plus-minus">
-                        <input class="cart-plus-minus-box" type="text" name="qtybutton" value="2">
-                      </div>
-                    </td>
-                    <td class="product-subtotal">$150.00</td>
-                    <td class="product-remove">
-                      <a href="#"><i class="fa fa-pencil"></i></a>
-                      <a href="#"><i class="fa fa-times"></i></a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="product-thumbnail">
-                      <a href="#"><img src="front_assets/img/cart/cart-5.jpg" alt=""></a>
-                    </td>
-                    <td class="product-name"><a href="#">PRODUCTS NAME HERE </a></td>
-                    <td class="product-price-cart"><span class="amount">$170.00</span></td>
-                    <td class="product-quantity">
-                      <div class="cart-plus-minus">
-                        <input class="cart-plus-minus-box" type="text" name="qtybutton" value="2">
-                      </div>
-                    </td>
-                    <td class="product-subtotal">$170.00</td>
-                    <td class="product-remove">
-                      <a href="#"><i class="fa fa-pencil"></i></a>
-                      <a href="#"><i class="fa fa-times"></i></a>
-                    </td>
-                  </tr>
+                  <?php 
+                    foreach($cartArry as $key=>$list){
+                  ?>
+                    <tr>
+                      <td class="product-thumbnail">
+                        <a href="#"><img src="<?php echo SITE_FOOD_IMG_CALL.$list['image']?>"></a>
+                      </td>
+                      <td class="product-name"><a href="#"><?php echo $list['name']?> </a></td>
+                      <td class="product-price-cart"><span class="amount">$ <?php echo $list['price']?></span></td>
+                      <td class="product-quantity">
+                        <div class="cart-plus-minus">
+                          <input class="cart-plus-minus-box" type="text" name="qty[<?php echo $key?>][]" value="<?php echo $list['food_qty']?>">
+                        </div>
+                      </td>
+                      <td class="product-subtotal">$ <?php echo $list['food_qty']*$list['price'] ?></td>
+                      <td class="product-remove">
+                        <a href="#"><i class="fa fa-pencil"></i></a>
+                        <a href="javascript:void(0)" onclick="delete_cart('<?php echo $key?>','load')"><i class="fa fa-times"></i></a>
+                      </td>
+                    </tr>
+                  <?php } ?>
                 </tbody>
               </table>
             </div>
@@ -86,15 +61,20 @@ include('header.php');
               <div class="col-lg-12">
                 <div class="cart-shiping-update-wrapper">
                   <div class="cart-shiping-update">
-                    <a href="#">Continue Shopping</a>
+                    <a href="<?php echo FRONTEND_SITE_PATH?>main">Continue Shopping</a>
                   </div>
                   <div class="cart-clear">
-                    <button>Update Shopping Cart</button>
-                    <a href="#">Clear Shopping Cart</a>
+                    <button name="update_cart">Update Shopping Cart</button>
+                    <a href="<?php echo FRONTEND_SITE_PATH?>checkout">Checkout</a>
                   </div>
                 </div>
               </div>
             </div>
+            <?php 
+                }else{
+                  echo "Your Cart is Empty";
+                }
+            ?>
           </form>
         </div>
       </div>

@@ -1782,25 +1782,24 @@ textarea:focus {
     color: #e02c2b;
     font-weight: 500;
 }
-.shopping-cart-btn {
+.shopping-cart-btn .add_to_cart_btn{
     margin-top: 23px;
-}
-.shopping-cart-btn a {
     margin-bottom: 15px;
-}
-.shopping-cart-btn a {
     background-color: transparent;
     border: 2px solid #eeeeee;
     color: #454545;
     display: block;
     font-size: 14px;
+    width: 100%;
     font-weight: 500;
     padding: 14px 20px 12px;
     text-align: center;
     text-transform: uppercase;
+    cursor: pointer;
     transition: all 0.3s ease 0s;
 }
-.shopping-cart-btn a:hover {
+
+.shopping-cart-btn .add_to_cart_btn:hover {
     background-color: #e02c2b;
     color: #fff;
 }
@@ -3793,6 +3792,17 @@ h4.shop-sidebar-title {
     font-weight: 400;
     text-transform: uppercase;
 }
+
+.product-thumbnail img{
+    width: 10rem;
+    height:8rem;
+    object-fit: cover;
+    margin-left: 10px;
+    padding: 10px;
+    border-radius: 4px !important;
+    cursor: default;
+}
+
 .cart-main-area .product-quantity {
     display: table-cell;
     margin: 0;
@@ -4045,6 +4055,12 @@ h4.grand-totall-title span {
     background-color: #242424;
 }
 
+.empty_msg{
+    font-size: 2rem;
+    text-align: center;
+    color: crimson;
+    font-weight: bolder;
+}
 /*---------------------------
     8. Login register page
 -----------------------------*/
@@ -4347,7 +4363,8 @@ h5.panel-title span {
     color: #e02c2b;
     margin: 0;
 }
-.checkout-login-btn > a {
+.checkout-login-btn > a,
+.checkout_login {
     background-color: #f2f2f2;
     color: #242424;
     display: inline-block;
@@ -4357,7 +4374,23 @@ h5.panel-title span {
     padding: 16px 62px 17px;
     text-transform: uppercase;
     border-radius: 3px;
+    cursor: pointer;
 }
+.checkout_login{
+    width: 14.1rem;
+    margin-right: 1rem;
+}
+
+.checkout-login form .hide_icone{
+    position: absolute;
+    top: 12%;
+    right: 1rem;
+    font-size: 18px;
+    padding: 5px;
+    color: #8b8b8b;
+    cursor: pointer;
+}
+
 .billing-btn > button {
     background-color: #f2f2f2;
     border: medium none;

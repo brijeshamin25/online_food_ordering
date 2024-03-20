@@ -3,7 +3,7 @@
 <head>
 </head>
 <body>
-  <div class="footer-area black-bg-2 pt-70">
+  <div class="footer-area black-bg-2">
     <div class="footer-bottom-area border-top-4">
       <div class="container">
         <div class="row">

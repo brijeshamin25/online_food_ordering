@@ -41,54 +41,6 @@ include('header.php');
       <?php
         } 
       ?>
-
-      <!-- <div class="single-slider pt-210 pb-220 bg-img" style="background-image:url(front_assets/img/slider/banner2.jpg);">
-        <div class="container">
-          <div class="slider-content slider-animated-1">
-            <h1 class="animated">Cooked with Care, Served with Love</h1>
-            <h3 class="animated">Fresh Healthy and Organic.</h3>
-            <div class="slider-btn mt-90">
-              <a class="animated" href="main.php">Order Now</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="single-slider pt-210 pb-220 bg-img img_opp" style="background-image:url(front_assets/img/slider/banner41.jpg);">
-        <div class="container">
-          <div class="slider-content slider-animated-1">
-            <h1 class="animated">Cooked with Care, Served with Love</h1>
-            <h3 class="animated">Fresh Healthy and Organic.</h3>
-            <div class="slider-btn mt-90">
-              <a class="animated" href="main.php">Order Now</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="single-slider pt-210 pb-220 bg-img" style="background-image:url(front_assets/img/slider/banner6.jpg);">
-        <div class="container">
-          <div class="slider-content slider-animated-1">
-            <h1 class="animated">Cooked with Care, Served with Love</h1>
-            <h3 class="animated">Fresh Healthy and Organic.</h3>
-            <div class="slider-btn mt-90">
-              <a class="animated" href="main.php">Order Now</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="single-slider pt-210 pb-220 bg-img" style="background-image:url(front_assets/img/slider/banner1.jpg);">
-        <div class="container">
-          <div class="slider-content slider-animated-1">
-            <h1 class="animated">Cooked with Care, Served with Love</h1>
-            <h3 class="animated">Fresh Healthy and Organic.</h3>
-            <div class="slider-btn mt-90">
-              <a class="animated" href="main.php">Order Now</a>
-            </div>
-          </div>
-        </div>
-      </div> -->
     </div>
   </div>      
 </body>

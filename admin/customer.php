@@ -1,22 +1,22 @@
 <?php
 include("header.php");
 
-$all_data_sql = "select * from reg_login where user_type = 'customer' order by user_id asc";
+$all_data_sql = "select * from customer order by cust_id asc";
 $res = mysqli_query($con, $all_data_sql);
 
-if(isset($_GET['type']) && $_GET['type'] !=='' && isset($_GET['user_id']) && $_GET['user_id'] > 0){
+if(isset($_GET['type']) && $_GET['type'] !=='' && isset($_GET['cust_id']) && $_GET['cust_id'] > 0){
   $type = safe_valueto($_GET['type']);
-  $id = safe_valueto($_GET['user_id']);
+  $id = safe_valueto($_GET['cust_id']);
 
 
-  if($type === 'onshow' || $type === 'offshow'){
-    $user_status = 1;
+  if($type == 'onshow' || $type == 'offshow'){
+    $cust_status = 1;
 
-    if($type === 'offshow'){
-      $user_status = 0;
+    if($type == 'offshow'){
+      $cust_status = 0;
     }
 
-    $update_sql = "update reg_login set user_status = '$user_status' where user_id = '$id'";
+    $update_sql = "update customer set cust_status = '$cust_status' where cust_id = '$id'";
 
     mysqli_query($con, $update_sql);
     redirect('customer.php');
@@ -61,18 +61,18 @@ if(isset($_GET['type']) && $_GET['type'] !=='' && isset($_GET['user_id']) && $_G
                   <td><?php echo $i ?></td>
                   <td><?php echo $row['fname'] ?></td>
                   <td><?php echo $row['lname'] ?></td>	
-                  <td><?php echo $row['phone_number'] ?></td>	
+                  <td><?php echo $row['phone'] ?></td>	
                   <td><?php echo $row['email'] ?></td>
                   <td>
 
                     <?php
-                      if($row['user_status'] == 1){
+                      if($row['cust_status'] == 1){
                     ?>
-                      <a href="?user_id=<?php echo $row['user_id']; ?>&type=offshow"><label class="badge badge-warning">Active</label></a>
+                      <a href="?cust_id=<?php echo $row['cust_id']; ?>&type=offshow"><label class="badge badge-warning">Active</label></a>
                     <?php 
                       }else{
                     ?>
-                      <a href="?user_id=<?php echo $row['user_id']; ?>&type=onshow"><label class="badge badge-warning2">Deactive</label></a>
+                      <a href="?cust_id=<?php echo $row['cust_id']; ?>&type=onshow"><label class="badge badge-warning2">Deactive</label></a>
                     <?php 
                       }
                     ?>

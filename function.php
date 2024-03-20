@@ -121,13 +121,42 @@ function getFoodItemId($id){
 	return $prs_row;
 }
 
-function removeFoodFromCart($id){
+function getUserInfo(){
+  global $con;
+	$data['fname'] = '';
+	$data['lname'] = '';
+	$data['email'] = '';
+	$data['phone'] = '';
+
 	if(isset($_SESSION['USER_ID'])){
-    global $con;
+		$cst_sel_sql = "select * from customer where cust_id=".$_SESSION['USER_ID'];
+		$cst_sel_res = mysqli_query($con,$cst_sel_sql);
+		$cst_sel_row = mysqli_fetch_assoc($cst_sel_res);
+		$data['fname'] = $cst_sel_row['fname'];
+		$data['lname'] = $cst_sel_row['lname'];
+		$data['email'] = $cst_sel_row['email'];
+		$data['phone'] = $cst_sel_row['phone'];
+	}
+	return $data;
+}
+
+function emptyCart(){
+	if(isset($_SESSION['USER_ID'])){
+		global $con;
+		$cst_del_sql = "delete from food_cart where customer_id=".$_SESSION['USER_ID'];
+		$cst_del_res = mysqli_query($con,$cst_del_sql);
+	}else{
+		unset($_SESSION['cart']);
+	}
+}
+
+function removeFoodFromCart($id){
+	if(isset($_SESSION['USER_ID'])){	
+		global $con;
 		$cart_itm_del_sql = "delete from food_cart where food_item_id='$id' and customer_id=".$_SESSION['USER_ID'];
 		$cart_itm_del_res = mysqli_query($con,$cart_itm_del_sql);
-  }else{
-    unset($_SESSION['cart'][$attr]);
-  }
+	}else{
+		unset($_SESSION['cart'][$id]);
+	}
 }
 ?>

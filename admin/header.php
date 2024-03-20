@@ -32,6 +32,8 @@ if($path == '' || $path == 'admin.php'){
   $title = 'Manage Slider';
 }elseif($path == 'contact_us.php'){
   $title = 'Contact Us';
+}elseif($path == 'order.php'){
+  $title = 'Order';
 }
 
 ?>
@@ -87,7 +89,7 @@ if($path == '' || $path == 'admin.php'){
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
               <div class="dropdown-divider">
               </div>
-              <a class="dropdown-item" href="../logout.php">
+              <a class="dropdown-item" href="logout.php">
                 <i class="mdi mdi-logout"></i>
                 Logout
               </a>
@@ -143,19 +145,18 @@ if($path == '' || $path == 'admin.php'){
           </li>
 
           <li class="nav-item">
+            <a class="nav-link" href="order.php">
+              <i class='bx bx-notepad menu-icon'></i>
+              <span class="menu-title">Order</span>
+            </a>
+          </li> 
+
+          <li class="nav-item">
             <a class="nav-link" href="contact_us.php">
               <i class='bx bxs-contact menu-icon'></i>
               <span class="menu-title">Contact Us</span>
             </a>
-          </li>
-
-          <!-- <li class="nav-item">
-            <a class="nav-link" href="#">
-              <i class='bx bx-notepad menu-icon'></i>
-              <span class="menu-title">Order</span>
-            </a>
-          </li> --> 
-          
+          </li> 
         </ul>
       </nav>
       
