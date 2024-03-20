@@ -28,6 +28,7 @@
   </div>
         
   <script src="<?php echo FRONTEND_SITE_PATH?>front_assets/js/vendor/jquery-1.12.0.min.js"></script>
+  <script src="<?php echo FRONTEND_SITE_PATH?>front_assets/js/form_script.js"></script>
   <script src="<?php echo FRONTEND_SITE_PATH?>front_assets/js/popper.js"></script>
   <script src="<?php echo FRONTEND_SITE_PATH?>front_assets/js/bootstrap.min.js"></script>
   <script src="<?php echo FRONTEND_SITE_PATH?>front_assets/js/imagesloaded.pkgd.min.js"></script>
@@ -36,10 +37,10 @@
   <script src="<?php echo FRONTEND_SITE_PATH?>front_assets/js/owl.carousel.min.js"></script>
   <script src="<?php echo FRONTEND_SITE_PATH?>front_assets/js/plugins.js"></script>
   <script src="<?php echo FRONTEND_SITE_PATH?>front_assets/js/main.js"></script>
-  <script src="<?php echo FRONTEND_SITE_PATH?>front_assets/js/form_script.js"></script>
   <script src="<?php echo FRONTEND_SITE_PATH?>front_assets/js/script.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <script> var FRONTEND_SITE_PATH = "<?php echo FRONTEND_SITE_PATH?>"; </script>
+  <script> var SITE_FOOD_IMG_CALL = "<?php echo SITE_FOOD_IMG_CALL?>"; </script>
 
 </body>
 </html>

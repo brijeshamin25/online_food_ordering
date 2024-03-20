@@ -91,15 +91,43 @@ function get_cart_detail($att_id=''){
 		$cartArry = array();
 		foreach($get_cart as $list){
 			$cartArry[$list['food_item_id']]['food_qty']=$list['food_qty'];
+			$getFoodItemId = getFoodItemId($list['food_item_id']);
+			$cartArry[$list['food_item_id']]['price']=$getFoodItemId['price'];
+			$cartArry[$list['food_item_id']]['name']=$getFoodItemId['food_name'];
+			$cartArry[$list['food_item_id']]['image']=$getFoodItemId['images'];
 		}
 	}else{
 		if(isset($_SESSION['cart']) && count($_SESSION['cart']) > 0){
-			$cartArry = $_SESSION['cart'];
+			foreach($_SESSION['cart'] as $key => $val){
+				$cartArry[$key]['food_qty']=$val['qty'];
+				$getFoodItemId = getFoodItemId($key);
+				$cartArry[$key]['price']=$getFoodItemId['price'];
+				$cartArry[$key]['name']=$getFoodItemId['food_name'];
+				$cartArry[$key]['image']=$getFoodItemId['images'];
+			}
 		}
 	}if($att_id != ''){
 		return $cartArry[$att_id]['food_qty'];
 	}else{
 		return $cartArry;
 	}
+}
+
+function getFoodItemId($id){
+	global $con;
+	$prs_sel_sql = "select food.food_name,food.images,food_item.price from food_item,food where food_item.food_item_id='$id' and food.food_id = food_item.food_id";
+	$prs_sel_res = mysqli_query($con,$prs_sel_sql);
+	$prs_row = mysqli_fetch_assoc($prs_sel_res);
+	return $prs_row;
+}
+
+function removeFoodFromCart($id){
+	if(isset($_SESSION['USER_ID'])){
+    global $con;
+		$cart_itm_del_sql = "delete from food_cart where food_item_id='$id' and customer_id=".$_SESSION['USER_ID'];
+		$cart_itm_del_res = mysqli_query($con,$cart_itm_del_sql);
+  }else{
+    unset($_SESSION['cart'][$attr]);
+  }
 }
 ?>

@@ -5,7 +5,16 @@ include('default.php');
 
 session_start();
 
+$totalPrice = 0;
 $cartArry = get_cart_detail();
+
+//prx($cartArry);
+
+foreach($cartArry as $list){
+  $totalPrice = $totalPrice+($list['food_qty']*$list['price']);
+}
+
+$totalFoodAdded = count($cartArry);
 ?>
 
 <!doctype html>
@@ -91,7 +100,7 @@ $cartArry = get_cart_detail();
                     <i class="icon-user icons"></i>
                   </div>
                   <div class="login-text-content">
-                    <p>Register <br> or <span>Sign in</span></p>
+                    <p>Sign up <br> or <span>Sign in</span></p>
                   </div>
                 </a>
               <?php 
@@ -105,13 +114,49 @@ $cartArry = get_cart_detail();
                 <a href="<?php echo FRONTEND_SITE_PATH?>cart">
                   <div class="header-icon-style">
                     <i class="icon-handbag icons"></i>
-                    <span class="count-style">0</span>
+                    <span class="count-style" id="totalFoodAdded"><?php echo $totalFoodAdded?></span>
                   </div>
                   <div class="cart-text">
                     <span class="digit">My Cart</span>
-                    <span class="cart-digit-bold"></span>
+                    <span class="cart-digit-bold" id="totalPrice">
+                      <?php
+                        if($totalPrice != 0){
+                          echo '$ '.$totalPrice;
+                        }
+                      ?>
+                    </span>
                   </div>
                 </a>
+                <?php if($totalPrice != 0){ ?>
+                  <div class="shopping-cart-content">
+                    <ul id="cart_ul">
+                      <?php foreach($cartArry as $key=>$list){ ?>
+                        <li class="single-shopping-cart" id="attr_<?php echo $key ?>">
+                          <div class="shopping-cart-img">
+                            <a href="javascript:void(0)"><img alt="" src="<?php echo SITE_FOOD_IMG_CALL.$list['image']?>"></a>
+                          </div>
+                          <div class="shopping-cart-title">
+                            <h4><a href="javascript:void(0)"> <?php echo $list['name']?> </a></h4>
+                            <h6>Qty: <?php echo $list['food_qty']?> </h6>
+                            <span> $ <?php echo $list['food_qty']*$list['price']; ?> </span>
+                          </div>
+                          <div class="shopping-cart-delete">
+                            <a href="javascript:void(0)" onclick="delete_cart('<?php echo $key?>')"><i class="ion ion-close"></i></a>
+                          </div>
+                        </li>
+                      <?php } ?>
+                    </ul>
+                    <div class="shopping-cart-total">
+                      <h4>Total : <span class="shop-total">$ <?php echo $totalPrice ?></span></h4>
+                    </div>
+                    <div class="shopping-cart-btn">
+                    <a href="<?php echo FRONTEND_SITE_PATH?>cart">view cart</a>
+                      <a href="<?php echo FRONTEND_SITE_PATH?>checkout">checkout</a>
+                    </div>
+                  </div>
+                <?php 
+                }
+                ?>
               </div>
             </div>
           </div>
