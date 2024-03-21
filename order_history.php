@@ -5,6 +5,7 @@ $cid = $_SESSION['USER_ID'];
 
 $all_data_sql = "select order_master.*,order_status.order_status as order_status_str from order_master,order_status where order_master.order_status=order_status.order_status_id and order_master.customer_id='$cid' order by order_master.order_master_id desc";
 $res = mysqli_query($con, $all_data_sql);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -1507,6 +1507,8 @@ textarea:focus {
 .logo img{
     width: 6rem !important;
     height:6rem;
+    mix-blend-mode: darken;
+    object-fit: cover;
 }
 
 .account-curr-lang-wrap ul li {

@@ -44,6 +44,13 @@ if(isset($_POST['place_order'])){
     $ord_itm_ins_res = mysqli_query($con,$ord_itm_ins_sql);
   }
   emptyCart();
+  $getUserInfo = getUserInfo();
+	$email = $getUserInfo['email'];
+  $emailHTML = orderPlacedEmail($insert_id);
+  include('smtp/PHPMailerAutoload.php');
+
+  send_email($email,$emailHTML,'Order Placed');
+
   redirect(FRONTEND_SITE_PATH.'success');
   prx($cartArry);
 

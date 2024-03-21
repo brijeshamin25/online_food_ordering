@@ -1,6 +1,6 @@
 <?php
 define("WEBSITE_NAME","Admin Panel");
-define("FRONTEND_WEBSITE_NAME","Online Food Ordering");
+define("FRONTEND_WEBSITE_NAME","The Eatery");
 
 define("FRONTEND_SITE_PATH","http://localhost/project/online_food_ordering/");
 
