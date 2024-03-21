@@ -24151,6 +24151,57 @@ dl li {
 }
 
 
+.table .order_table_title th:nth-child(1){
+  width: 5%;
+}
+.table .order_table_title th:nth-child(2){
+  width: 9%;
+}
+.table .order_table_title th:nth-child(3){
+  width: 9%;
+}
+.table .order_table_title th:nth-child(4){
+  width:20%;
+}
+.table .order_table_title th:nth-child(5){
+  width:20%;
+}
+.table .order_table_title th:nth-child(6){
+  width: 9%;
+}
+.table .order_table_title th:nth-child(7){
+  width: 5%;
+}
+.table .order_table_title th:nth-child(8){
+  width: 5%;
+}
+.table .order_table_title th:nth-child(9){
+  width: 17%;
+}
+
+.payment_status{
+    padding: 0.5rem;
+    text-align: center;
+}
+
+.payment_status_pending{
+  background-color: #fe5537;
+  color: #fff;
+}
+
+.payment_status_success{
+  background-color: #169116bf;
+  color: #fff;
+}
+
+.inner_tabel{
+  border: 1px solid #e9e8ef;
+}
+
+.inner_tabel .inner_table_row{
+  border-bottom: 1px solid #222;
+}
+
 .no_data_msg .align_cnt{
   text-align: center;
   font-weight: 500;
@@ -29913,7 +29964,7 @@ div.tagsinput span.tag a {
 .mt8{margin-top:8px;}
 .hand_cursor{cursor:pointer;}
 
-.payment_status{
+/* .payment_status{
 	padding: 10px;
     text-align: center;
     color: #fff;
@@ -29925,7 +29976,7 @@ div.tagsinput span.tag a {
 }
 .payment_status_success{
 	background-color:green;
-}
+} */
 
 .div_order_id{
 	background-color: #999;

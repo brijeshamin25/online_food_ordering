@@ -60,7 +60,7 @@ include('header.php');
 
                       <input type="email" name="email" id="email" placeholder="Enter Email" required/>
 
-                      <span id="email_error" class="errMsg ml-10"></span>
+                      <span id="email_error_sign" class="errMsgSign ml-10"></span>
 
                       <input type="number" name="phone" id="phone" placeholder="Enter Phone Number" required/>
 

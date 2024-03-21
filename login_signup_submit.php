@@ -19,7 +19,7 @@ if ($sign_reg == 'register') {
 
   $verify = mysqli_num_rows(mysqli_query($con, "SELECT * FROM customer WHERE email = '$email'"));
   if ($verify > 0) {
-    $arr = array('status' => 'error', 'msg' => 'Email ID Already Exists 😞', 'field' => 'email_error');
+    $arr = array('status' => 'error', 'msg' => 'Email ID Already Exists 😞', 'field' => 'email_error_sign');
     echo json_encode($arr);
   }else if($password !== $compassword){
     $arr = array('status' => 'error', 'msg' => 'Password Not Matched!!🙄', 'field' => 'pass_error');

@@ -1718,15 +1718,16 @@ textarea:focus {
 }
 
 .shopping-cart-img img{
-    height: 4.5rem;
-    margin-top: 2px;
+    height: 5.0rem;
+    margin-top: 1px;
     object-fit: cover;
+    margin-bottom: 8px;
 }
 .shopping-cart-title > h4 {
     color: #242424;
     font-size: 14px;
     line-height: 18px;
-    margin: 0;
+    margin: 2px;
 }
 .shopping-cart-title > h4 a {
     color: #242424;
@@ -1737,7 +1738,9 @@ textarea:focus {
 .shopping-cart-title > h6 {
     color: #555;
     font-size: 13px;
-    margin: 5px 0 10px;
+    /* margin: 5px 0 10px; */
+    margin-top: 6px;
+    margin-bottom: 8px 
 }
 .shopping-cart-title > span {
     color: #555;
@@ -1758,7 +1761,7 @@ textarea:focus {
     line-height: 15px;
     margin-top: 2px;
     text-align: center;
-    width: 20px;
+    width: 18px;
 }
 .shopping-cart-delete > a:hover {
     border: 2px solid #e02c2b;
@@ -2232,6 +2235,7 @@ textarea:focus {
 }
 .product-content > h4 a {
     color: #2f333a;
+    cursor: default;
 }
 .product-price-wrapper > span {
     color: #2f333a;
@@ -2266,6 +2270,7 @@ textarea:focus {
     border-radius: 2px 10px;
     box-shadow: 2px 5px 4px rgba(0, 0, 0, 0.8);
     transition: all 0.6s linear;
+    object-fit: cover;
 }
   
 .product-img img:hover {
@@ -2562,6 +2567,7 @@ textarea:focus {
 }
 .footer-bottom-area {
     padding: 22px 0 24px;
+    /* margin-top: 70px; */
 }
 .payment-img img {
     max-width: 100%;
@@ -4190,7 +4196,29 @@ h4.grand-totall-title span {
     cursor: pointer;
 }
 
-form .errMsg, .passMsg{
+form .errMsgSign{
+    color: crimson;
+    padding: 10px;
+    height: 40px;
+    text-align: center;
+    border-radius: 4px;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    font-size: 1.2rem;
+    margin-top: 10px;
+}
+
+form .errMsg{
+    color: crimson;
+    padding: 10px;
+    height: 40px;
+    text-align: center;
+    border-radius: 4px;
+    font-size: 1.2rem;
+    margin-top: 10px;
+}
+form .passMsg{
     color: crimson;
     padding: 10px;
     height: 40px;
@@ -4656,6 +4684,24 @@ h5.panel-title span {
 .entries-edit-delete > a:hover,
 .entries-edit-delete > a.edit:hover {
     background-color: #e02c2b;
+}
+
+/*--------------------------
+        Order History
+----------------------------*/
+.payment_status{
+    padding: 0.5rem;
+    text-align: center;
+}
+
+.payment_status_pending{
+  background-color: #fe5537;
+  color: #fff;
+}
+
+.payment_status_success{
+  background-color: #169116bf;
+  color: #fff;
 }
 
 /*---------------------------
@@ -5467,7 +5513,7 @@ h5.panel-title span {
     right: 0;
     top: 167%;
     width: 340px;
-    z-index: 9999;
+    z-index: 200;
 }
 
 .shopping-cart-content-box .shopping-cart-img{

@@ -1,7 +1,7 @@
 <?php
 include("header.php");
 
-$all_data_sql = "select * from `order` order by order_id asc";
+$all_data_sql = "select order_master.*,order_status.order_status as order_status_str from order_master,order_status where order_master.order_status=order_status.order_status_id order by order_master.order_master_id desc";
 $res = mysqli_query($con, $all_data_sql);
 
 ?>
@@ -31,7 +31,10 @@ $res = mysqli_query($con, $all_data_sql);
                   <th>Address/Zip Code</th>
                   <th>Email/Phone</th>
                   <th>Price</th>
-                  <th>Action</th>
+                  <th>Order Details</th>
+                  <th>Payment Status</th>
+                  <th>Order Status</th>
+                  <th>Added On</th>
                 </tr>
               </thead>
               <tbody>
@@ -40,7 +43,7 @@ $res = mysqli_query($con, $all_data_sql);
                   while ($row = mysqli_fetch_assoc($res)) {
                 ?>
                 <tr>
-                  <td><?php echo $i ?></td>
+                  <td><?php echo $row['order_master_id'] ?></td>
                   <td><?php echo $row['first_name'] ?></td>
                   <td><?php echo $row['last_name'] ?></td>
                   <td>
@@ -51,10 +54,39 @@ $res = mysqli_query($con, $all_data_sql);
                     <p><?php echo $row['email'] ?></p>
                     <p><?php echo $row['phone'] ?></p>
                   </td>	
-                  <td>$ <?php echo $row['total_price'] ?></td>	
+                  <td>$ <?php echo $row['total_price'] ?></td>
                   <td>
-
+                    <table class="inner_tabel">
+                      <tr class="inner_table_row">
+                        <th>Food</th>
+                        <th>Attribute</th>
+                        <th>Price</th>
+                        <th>Qty</th>
+                      </tr>
+                      <?php 
+                        $getOrderData = getOrderData($row['order_master_id']);
+                        foreach($getOrderData as $list){ ?>
+                          <tr>
+                            <td><?php echo $list['food_name'] ?></td>
+                            <td><?php echo $list['food_attribute'] ?></td>
+                            <td><?php echo $list['price'] ?></td>
+                            <td><?php echo $list['qty'] ?></td>
+                          </tr>
+                      <?php
+                        }
+                      ?>
+                    </table>
                   </td>
+                  <td>
+                    <div class="payment_status payment_status_<?php echo $row['payment_status']?>"><?php echo ucfirst($row['payment_status']) ?></div>
+                  </td>
+                  <td><?php echo $row['order_status_str'] ?></td>   
+                  <td>
+                    <?php 
+                    $dateStr=strtotime($row['added_on']);
+                    echo date('d-m-Y h:s',$dateStr);
+                    ?>
+							    </td>	
                 </tr>
                 <?php
                 $i++;

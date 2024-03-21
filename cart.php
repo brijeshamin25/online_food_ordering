@@ -48,7 +48,6 @@ include('header.php');
                       </td>
                       <td class="product-subtotal">$ <?php echo $list['food_qty']*$list['price'] ?></td>
                       <td class="product-remove">
-                        <a href="#"><i class="fa fa-pencil"></i></a>
                         <a href="javascript:void(0)" onclick="delete_cart('<?php echo $key?>','load')"><i class="fa fa-times"></i></a>
                       </td>
                     </tr>

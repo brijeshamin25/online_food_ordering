@@ -48,7 +48,7 @@ $totalFoodAdded = count($cartArry);
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-
+  <link rel="icon" type="image/svg" href="front_assets/img/brand-logo/the-eatery.svg" />
   <link rel="stylesheet" href="<?php echo FRONTEND_SITE_PATH?>front_assets/css/bootstrap.min.css">
   <link rel="stylesheet" href="<?php echo FRONTEND_SITE_PATH?>front_assets/css/animate.css">
   <link rel="stylesheet" href="<?php echo FRONTEND_SITE_PATH?>front_assets/css/owl.carousel.min.css">

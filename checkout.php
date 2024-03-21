@@ -32,9 +32,10 @@ if(isset($_POST['place_order'])){
   $checkout_zip = safe_valueto($_POST['checkout_zip']);
   $checkout_address = safe_valueto($_POST['checkout_address']);
   $payment_type = safe_valueto($_POST['payment_type']);
+  $added_on = date('Y-m-d h:i:s');
 
-  $order_ins_sql = "insert into `order`(customer_id,first_name,last_name,address,zip_code,phone,email,total_price,payment_status,order_status_id) values('".$_SESSION['USER_ID']."','$checkout_fname','$checkout_lname','$checkout_address','$checkout_zip','$checkout_phone','$checkout_email','$totalPrice','pending','1')";
-  
+  $order_ins_sql = "insert into order_master(customer_id,first_name,last_name,address,zip_code,phone,email,total_price,payment_status,order_status,added_on) values('".$_SESSION['USER_ID']."','$checkout_fname','$checkout_lname','$checkout_address','$checkout_zip','$checkout_phone','$checkout_email','$totalPrice','pending','1',NOW())";
+
   mysqli_query($con,$order_ins_sql);
   $insert_id = mysqli_insert_id($con);
   $_SESSION['ORDER_ID'] =$insert_id;
@@ -44,7 +45,7 @@ if(isset($_POST['place_order'])){
   }
   emptyCart();
   redirect(FRONTEND_SITE_PATH.'success');
-  // prx($cartArry);
+  prx($cartArry);
 
   // prx($_POST);
 }
@@ -66,7 +67,7 @@ if(isset($_POST['place_order'])){
     </div>
   </div>
 
-  <div class="checkout-area pb-80 pt-100">
+  <div class="checkout-area pb-25 pt-100">
     <div class="container">
       <div class="row">
         <div class="col-lg-9">

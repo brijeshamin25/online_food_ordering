@@ -159,4 +159,15 @@ function removeFoodFromCart($id){
 		unset($_SESSION['cart'][$id]);
 	}
 }
+
+function getOrderData($oid){
+	global $con;
+	$ord_sel_sql = "SELECT order_item.price,order_item.qty,food_item.food_attribute,food.food_name from order_item,food_item,food WHERE order_item.order_id=$oid AND order_item.food_item_id=food_item.food_item_id AND food_item.food_id=food.food_id;";
+	$ord_sel_res = mysqli_query($con,$ord_sel_sql);
+	$data = array();
+	while($row = mysqli_fetch_assoc($ord_sel_res)){
+		$data[] = $row;
+	}
+	return $data;
+}
 ?>

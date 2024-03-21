@@ -49,6 +49,7 @@ if($path == '' || $path == 'admin.php'){
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <link rel="stylesheet" href="https://cdn.materialdesignicons.com/5.9.55/css/materialdesignicons.min.css">
 
+  <link rel="icon" type="image/svg" href="../front_assets/img/brand-logo/the-eatery.svg" />
   <link rel="stylesheet" href="assets/css/fonts.css">
 
   <link rel="stylesheet" href="assets/css/dataTables.bootstrap4.css">
