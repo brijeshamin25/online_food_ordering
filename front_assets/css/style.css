@@ -5530,7 +5530,11 @@ h5.panel-title span {
     padding-bottom: 15px !important; 
 }
 
-
 .checkout-progress .checkout_title{
 	margin-bottom:20px;
+}
+
+.pdf_dwn_icon{
+    padding: 1.2rem;
+    font-size: 2.6rem;
 }

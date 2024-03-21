@@ -1,6 +1,10 @@
 <?php
 include('header.php');
 
+if(!isset($_SESSION['USER_ID'])){
+  redirect(FRONTEND_SITE_PATH.'main');
+}
+
 $getUserInfo = getUserInfo();
 
 // prx($getUserInfo);

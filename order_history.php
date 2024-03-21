@@ -40,7 +40,10 @@ $res = mysqli_query($con, $all_data_sql);
 										while ($row = mysqli_fetch_assoc($res)) {
 									?>
 										<tr>
-											<td><?php echo $row['order_master_id'] ?></td>
+											<td>
+												<?php echo $row['order_master_id'] ?> <br>
+												<a href="<?php echo FRONTEND_SITE_PATH?>download_invoice?order_id=<?php echo $row['order_master_id'] ?>"> <i class='bx bxs-file-pdf pdf_dwn_icon' title="Download Invoice"></i> </a>
+											</td>
 											<td><?php echo $row['first_name'] ?></td>
 											<td>$ <?php echo $row['total_price'] ?></td>
 											<td>
