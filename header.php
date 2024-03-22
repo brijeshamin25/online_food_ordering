@@ -6,6 +6,7 @@ include('default.php');
 session_start();
 
 $totalPrice = 0;
+getFoodCartStatus();
 
 if(isset($_POST['update_cart'])){
   foreach($_POST['qty'] as $key=> $val){

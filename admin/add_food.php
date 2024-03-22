@@ -62,11 +62,14 @@ if(isset($_POST["submit"])){
         $addFoodId = mysqli_insert_id($con);//Last recorded Id
         $attribArray = $_POST['food_attribute'];
         $priceArray = $_POST['price'];
+        $statusArray = $_POST['food_status'];
 
         foreach($attribArray as $key => $value){
           $attr = $value;
           $prs = $priceArray[$key];
-          $insertSql = "insert into food_item(food_id,food_attribute,price,food_status) values('$addFoodId','$attr','$prs',1)";
+          $sts = $statusArray[$key];
+
+          $insertSql = "insert into food_item(food_id,food_attribute,price,food_status) values('$addFoodId','$attr','$prs','$sts')";
           $res = mysqli_query($con,$insertSql);
         }
 
@@ -95,18 +98,20 @@ if(isset($_POST["submit"])){
 
         $attribArray = $_POST['food_attribute'];
         $priceArray = $_POST['price'];
+        $statusArray = $_POST['food_status'];
         $foodDetailIdArry = $_POST['food_detail_id'];
 
         foreach($attribArray as $key => $value){
           $attr = $value;
           $prs = $priceArray[$key];
+          $sts = $statusArray[$key];
 
           if(isset($foodDetailIdArry[$key])){
             $id_new = $foodDetailIdArry[$key]; 
-            $updateSql = "update food_item set food_attribute='$attr', price='$prs' where food_item_id = '$id_new'";
+            $updateSql = "update food_item set food_attribute='$attr', price='$prs', food_status='$sts' where food_item_id = '$id_new'";
             $res = mysqli_query($con,$updateSql);
           }else{
-            $insertSql = "insert into food_item(food_id,food_attribute,price,food_status) values('$id','$attr','$prs',1)";
+            $insertSql = "insert into food_item(food_id,food_attribute,price,food_status) values('$id','$attr','$prs','$sts')";
             $res = mysqli_query($con,$insertSql);
           }
         }
@@ -167,7 +172,7 @@ $food_type_arr = array("Veg","Non-Veg");
                   <option value="">Select Food Type</option>
                   <?php
                     foreach ($food_type_arr as $list) {
-                      if($list === '$food_type'){
+                      if($list == '$food_type'){
                         echo "<option value='$list' selected>".strtoupper($list)."</option>";
                       }else{
                         echo "<option value='$list'>".strtoupper($list)."</option>";
@@ -192,14 +197,22 @@ $food_type_arr = array("Veg","Non-Veg");
 
               <?php if($id === 0) {?>
                 <div class="row">
-                  <div class="col-5">
+                  <div class="col-4">
                     <label for="exampleInputEmail3">Food Attribute</label>
                     <input type="text" class="form-control" placeholder="Food Attribute" name="food_attribute[]" required>
                   </div>
 
-                  <div class="col-5">
+                  <div class="col-3">
                     <label for="exampleInputEmail3">Price</label>
                     <input type="text" class="form-control" placeholder="Food Attribute Price" name="price[]" required>
+                  </div>
+
+                  <div class="col-3">
+                    <select name="food_status[]" class="form-control" required>
+                      <option value="">Select Status</option>
+                      <option value="1">Active</option>
+                      <option value="0">Deactive</option>
+                    </select>
                   </div>
                 </div>
               <?php } else {
@@ -211,17 +224,35 @@ $food_type_arr = array("Veg","Non-Veg");
                 while($food_item_row = mysqli_fetch_assoc($food_item_res)){
                 ?>
                 <div class="row">
-                  <div class="col-5">
+                  <div class="col-4">
                     <!-- <label for="exampleInputEmail3">Food Attribute</label> -->
-
                     <input type="hidden" name="food_detail_id[]" value="<?php echo $food_item_row['food_item_id']?>">
 
                     <input type="text" class="form-control" placeholder="Food Attribute" name="food_attribute[]" required value="<?php echo $food_item_row['food_attribute']?>">
                   </div>
 
-                  <div class="col-5">
+                  <div class="col-3">
                     <!-- <label for="exampleInputEmail3">Price</label> -->
                     <input type="text" class="form-control" placeholder="Food Attribute Price" name="price[]" required value="<?php echo $food_item_row['price']?>">
+                  </div>
+
+                  <div class="col-3">
+                    <select name="food_status[]" class="form-control" required>
+                      <option value="">Select Status</option>
+                      <?php if($food_item_row['food_status'] == 1){ ?>
+                        <option value="1" selected>Active</option>
+                        <option value="0">Deactive</option>
+                      <?php
+                       }
+                      ?>
+
+                      <?php if($food_item_row['food_status'] == 0){ ?>
+                        <option value="1">Active</option>
+                        <option value="0" selected>Deactive</option>
+                      <?php
+                       }
+                      ?>
+                    </select>
                   </div>
 
                   <?php if($j != 1){?>
@@ -258,7 +289,7 @@ $food_type_arr = array("Veg","Non-Veg");
       add_more++;
       jQuery('#add_more').val(add_more);
 
-      var html = '<div class="row" id="rmv_btn'+add_more+'"><div class="col-5"><input type="text" class="form-control" placeholder="Food Attribute" name="food_attribute[]" required></div><div class="col-5"><input type="text" class="form-control" placeholder="Food Attribute Price" name="price[]" required></div><div class="col-2"><button type="button" class="btn btn_rmv btn-primary" onclick=remove_btn("'+add_more+'")><span>Remove </span></button></div>';
+      var html = '<div class="row" id="rmv_btn'+add_more+'"><div class="col-4"><input type="text" class="form-control" placeholder="Food Attribute" name="food_attribute[]" required></div><div class="col-3"><input type="text" class="form-control" placeholder="Food Attribute Price" name="price[]" required></div><div class="col-3"><select class="form-control" name="food_status[] required"><option value="">Select Status</option><option value="1">Active</option><option value="0">Deactive</option></select></div><div class="col-2"><button type="button" class="btn btn_rmv btn-primary" onclick=remove_btn("'+add_more+'")><span>Remove </span></button></div>';
       jQuery('#attribute_row').append(html);
     }
 

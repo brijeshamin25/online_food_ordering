@@ -84,8 +84,51 @@ function manage_cart($uid,$qty,$attr){
 	}
 }
 
+function getFoodCartStatus(){
+	global $con;
+
+	$cartArry = array(); //Calling Data from the Database
+	$foodItemArry = array(); 
+	if(isset($_SESSION['USER_ID'])){
+		$get_cart = get_cart();
+		$cartArry = array();
+		foreach($get_cart as $list){
+			$foodItemArry[] = $list['food_item_id'];
+		}
+	}else{ // Calling data from the Session [If the User is not Login]
+		if(isset($_SESSION['cart']) && count($_SESSION['cart']) > 0){
+			foreach($_SESSION['cart'] as $key => $val){
+				$foodItemArry[] = $key;
+			}
+		}
+	}
+	// pr($foodItemArry);
+	foreach($foodItemArry as $id){
+		$cart_sele_sql = "select food_item.food_status as food_item_status,food.food_status,food.food_id from food_item,food where food_item.food_item_id = '$id' and food_item.food_id=food.food_id";
+		$cart_sele_resu = mysqli_query($con,$cart_sele_sql);
+		$cart_sele_row = mysqli_fetch_assoc($cart_sele_resu);
+		//return $cart_sele_row['food_status'];
+		if($cart_sele_row['food_status'] == 0){
+			$id = $cart_sele_row['food_id'];
+			$sel_sql = "select food_item_id from food_item where food_id = '$id'";
+			$sel_res = mysqli_query($con,$sel_sql);
+
+			while($sel_row = mysqli_fetch_assoc($sel_res)){
+				removeFoodFromCart($sel_row['food_item_id']);
+			}
+		}
+
+		if($cart_sele_row['food_item_status'] == 0){
+			removeFoodFromCart($id);
+		}
+	}
+	// return $cart_sele_row['food_status'];
+	// die();
+	// prx($cart_sele_row);
+}
+
 function get_cart_detail($att_id=''){
-	$cartArry = array();
+	$cartArry = array(); //Calling Data from the Database
 	if(isset($_SESSION['USER_ID'])){
 		$get_cart = get_cart();
 		$cartArry = array();
@@ -96,7 +139,7 @@ function get_cart_detail($att_id=''){
 			$cartArry[$list['food_item_id']]['name']=$getFoodItemId['food_name'];
 			$cartArry[$list['food_item_id']]['image']=$getFoodItemId['images'];
 		}
-	}else{
+	}else{ // Calling data from the Session [If the User is not Login]
 		if(isset($_SESSION['cart']) && count($_SESSION['cart']) > 0){
 			foreach($_SESSION['cart'] as $key => $val){
 				$cartArry[$key]['food_qty']=$val['qty'];
@@ -112,6 +155,46 @@ function get_cart_detail($att_id=''){
 		return $cartArry;
 	}
 }
+
+// function get_cart_detail($att_id=''){
+// 	$cartArry = array(); //Calling Data from the Database
+// 	if(isset($_SESSION['USER_ID'])){
+// 		$get_cart = get_cart();
+// 		$cartArry = array();
+// 		foreach($get_cart as $list){
+// 			$getFoodStatus = getFoodStatus($list['food_item_id']);
+// 			if($getFoodStatus == 1){
+// 				$cartArry[$list['food_item_id']]['food_qty']=$list['food_qty'];
+// 				$getFoodItemId = getFoodItemId($list['food_item_id']);
+
+// 				$cartArry[$list['food_item_id']]['price']=$getFoodItemId['price'];
+// 				$cartArry[$list['food_item_id']]['name']=$getFoodItemId['food_name'];
+// 				$cartArry[$list['food_item_id']]['image']=$getFoodItemId['images'];
+// 			}else{
+// 				removeFoodFromCart($list['food_item_id']);
+// 			}
+// 		}
+// 	}else{ // Calling data from the Session [If the User is not Login]
+// 		if(isset($_SESSION['cart']) && count($_SESSION['cart']) > 0){
+// 			foreach($_SESSION['cart'] as $key => $val){
+// 				$getFoodStatus = getFoodStatus($key);
+// 				if($getFoodStatus == 1){
+// 					$cartArry[$key]['food_qty']=$val['qty'];
+// 					$getFoodItemId = getFoodItemId($key);
+// 					$cartArry[$key]['price']=$getFoodItemId['price'];
+// 					$cartArry[$key]['name']=$getFoodItemId['food_name'];
+// 					$cartArry[$key]['image']=$getFoodItemId['images'];
+// 				}else{
+// 					removeFoodFromCart($key);
+// 				}
+// 			}
+// 		}
+// 	}if($att_id != ''){
+// 		return $cartArry[$att_id]['food_qty'];
+// 	}else{
+// 		return $cartArry;
+// 	}
+// }
 
 function getFoodItemId($id){
 	global $con;
