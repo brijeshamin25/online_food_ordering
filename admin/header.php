@@ -14,8 +14,8 @@ if(!isset($_SESSION['admin_nm'])){
 }
 
 $title = '';
-if($path == '' || $path == 'admin.php'){
-  $title = 'Admin Panel';
+if($path == '' || $path == 'index.php'){
+  $title = 'Admin Dashboard';
 }elseif($path == 'menu.php'){
   $title = 'Menu';
 }elseif($path == 'add_menu.php'){
@@ -77,7 +77,7 @@ if($path == '' || $path == 'admin.php'){
         </ul>
 
         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-          <a class="navbar-brand brand-logo" href="admin.php"><img src="assets/images/the-eatery.svg" alt="logo"/></a>
+          <a class="navbar-brand brand-logo" href="index.php"><img src="assets/images/the-eatery.svg" alt="logo"/></a>
           <a class="navbar-brand brand-logo-mini" href="#"><img src="assets/images/the-eatery.svg" alt="logo"/></a>
         </div>
 
@@ -111,7 +111,7 @@ if($path == '' || $path == 'admin.php'){
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="admin.php">
+            <a class="nav-link" href="index.php">
               <i class="mdi mdi-monitor-dashboard menu-icon"></i>
               <span class="menu-title">Dashboard</span>
             </a>

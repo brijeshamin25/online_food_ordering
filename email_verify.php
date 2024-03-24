@@ -4,8 +4,8 @@ include('header.php');
 
 $verify_msg = '';
 
-if(isset($_GET['id']) && $_GET['id']!=''){
-  $id=safe_valueto($_GET['id']);
+if(isset($_GET['cust_id']) && $_GET['cust_id']!=''){
+  $id=safe_valueto($_GET['cust_id']);
   $eml_sts_upd_sql = "update customer set email_verify=1 where random_str='$id'";
   $emlsts_res = mysqli_query($con, $eml_sts_upd_sql);
   $verify_msg = "Congratulations on successfully verifying your email address! 🎉 Welcome to <span class='company_nm'> The EATERY </sapn>, where culinary delights await you at every click.";

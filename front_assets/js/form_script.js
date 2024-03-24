@@ -38,7 +38,6 @@ jQuery('#formLogin').on('submit',function(e){
 			// console.log("result from server:",result);
 			jQuery('#login_form_msg').html('');
 			jQuery('#login_submit_btn').attr('disabled',false);
-
       var data = JSON.parse(result);
 			if(data.status=='error'){
 				jQuery('#email_error').html(data.msg);

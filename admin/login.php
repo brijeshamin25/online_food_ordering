@@ -23,7 +23,7 @@ if(isset($_POST['submit'])){
         <script> 
           alert('Successfull Login Admin Panel');
         </script>";
-      redirect('admin.php');
+      redirect('index.php');
       // echo"
       //   <script>
       //     alert('Admin Login Successfully...!');

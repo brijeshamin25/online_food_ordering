@@ -25,6 +25,7 @@ if(isset($_SESSION['USER_ID'])){
 $userArry = getUserInfo();
 
 if(isset($_POST['place_order'])){
+  prx($_POST);
   $checkout_fname = safe_valueto($_POST['checkout_fname']);
   $checkout_lname = safe_valueto($_POST['checkout_lname']);
   $checkout_email = safe_valueto($_POST['checkout_email']);
@@ -34,7 +35,7 @@ if(isset($_POST['place_order'])){
   $payment_type = safe_valueto($_POST['payment_type']);
   $added_on = date('Y-m-d h:i:s');
 
-  $order_ins_sql = "insert into order_master(customer_id,first_name,last_name,address,zip_code,phone,email,total_price,payment_status,order_status,added_on) values('".$_SESSION['USER_ID']."','$checkout_fname','$checkout_lname','$checkout_address','$checkout_zip','$checkout_phone','$checkout_email','$totalPrice','pending','1',NOW())";
+  $order_ins_sql = "insert into order_master(customer_id,first_name,last_name,address,zip_code,phone,email,total_price,payment_status,order_status,payment_type,added_on) values('".$_SESSION['USER_ID']."','$checkout_fname','$checkout_lname','$checkout_address','$checkout_zip','$checkout_phone','$checkout_email','$totalPrice','pending','1','$payment_type',NOW())";
 
   mysqli_query($con,$order_ins_sql);
   $insert_id = mysqli_insert_id($con);
@@ -46,13 +47,19 @@ if(isset($_POST['place_order'])){
   emptyCart();
   $getUserInfo = getUserInfo();
 	$email = $getUserInfo['email'];
-  $emailHTML = orderPlacedEmail($insert_id);
-  include('smtp/PHPMailerAutoload.php');
 
-  send_email($email,$emailHTML,'Order Placed');
+  if($payment_type == 'cod'){
+    $emailHTML = orderPlacedEmail($insert_id);
+    include('smtp/PHPMailerAutoload.php');
+    send_email($email,$emailHTML,'Order Placed');
+    redirect(FRONTEND_SITE_PATH.'success');
+  }
 
-  redirect(FRONTEND_SITE_PATH.'success');
-  prx($cartArry);
+  if($payment_type == 'card'){
+    
+  }
+  
+  // prx($cartArry);
 
   // prx($_POST);
 }
@@ -174,8 +181,13 @@ if(isset($_POST['place_order'])){
                           
                         <div class="ship-wrapper">
                           <div class="single-ship">
-                            <input type="radio" name="payment_type" value="cod" checked="checked">
+                            <input type="radio" name="payment_type" value="cod" >
                             <label>Cash on Delivery(COD)</label>
+                          </div>
+
+                          <div class="single-ship">
+                            <input type="radio" name="payment_type" value="card" checked="checked">
+                            <label>Pay With Card</label>
                           </div>
                           <!--<div class="single-ship">
                             <input type="radio" name="address" value="dadress">

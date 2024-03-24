@@ -1,6 +1,10 @@
 <?php
 include ("header.php");
 
+if(!isset($_SESSION['USER_ID'])){
+	redirect(FRONTEND_SITE_PATH.'main');
+}
+
 $cid = $_SESSION['USER_ID'];
 
 $all_data_sql = "select order_master.*,order_status.order_status as order_status_str from order_master,order_status where order_master.order_status=order_status.order_status_id and order_master.customer_id='$cid' order by order_master.order_master_id desc";
@@ -28,8 +32,8 @@ $res = mysqli_query($con, $all_data_sql);
 										<th>Order ID</th>
 										<th>First Name</th>
 										<th>Price</th>
-										<th>Address/Zipcode</th>
-										<th>Food Ordered</th>
+										<th>Address</th>
+										<th>Zipcode</th>
 										<th>Order Status</th>
 										<th>Payment Status</th>
 									</tr>
@@ -41,37 +45,19 @@ $res = mysqli_query($con, $all_data_sql);
 									?>
 										<tr>
 											<td>
-												<?php echo $row['order_master_id'] ?> <br>
-												<a href="<?php echo FRONTEND_SITE_PATH?>download_invoice?order_id=<?php echo $row['order_master_id'] ?>"> <i class='bx bxs-file-pdf pdf_dwn_icon' title="Download Invoice"></i> </a>
+												<div class="order_dtl_link_id">
+													<a title="View Order Details" href="<?php echo FRONTEND_SITE_PATH.'order_details?order_master_id='.$row['order_master_id'] ?>"><?php echo $row['order_master_id'] ?></a>
+												</div> <br>
+												<a href="<?php echo FRONTEND_SITE_PATH?>download_invoice?order_master_id=<?php echo $row['order_master_id'] ?>"> <i class='bx bxs-file-pdf pdf_dwn_icon' title="Download Invoice"></i> </a>
 											</td>
 											<td><?php echo $row['first_name'] ?></td>
 											<td>$ <?php echo $row['total_price'] ?></td>
 											<td>
-												<p><?php echo $row['address'] ?></p>
-												<p><?php echo $row['zip_code'] ?></p>
-											</td>	
-											<td>
-												<table class="inner_tabel">
-													<tr class="inner_table_row">
-														<th>Food</th>
-														<th>Attribute</th>
-														<th>Price</th>
-														<th>Qty</th>
-													</tr>
-													<?php 
-														$getOrderData = getOrderData($row['order_master_id']);
-														foreach($getOrderData as $list){ ?>
-															<tr>
-																<td><?php echo $list['food_name'] ?></td>
-																<td><?php echo $list['food_attribute'] ?></td>
-																<td><?php echo $list['price'] ?></td>
-																<td><?php echo $list['qty'] ?></td>
-															</tr>
-													<?php
-														}
-													?>
-												</table>
+												<?php echo $row['address'] ?>
 											</td>
+											<td>
+												<?php echo $row['zip_code'] ?>
+											</td>	
 											<td><?php echo $row['order_status_str'] ?></td>
 											<td>
 												<div class="payment_status payment_status_<?php echo $row['payment_status']?>"><?php echo ucfirst($row['payment_status']) ?></div>

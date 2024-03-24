@@ -31,7 +31,7 @@ if ($sign_reg == 'register') {
     $cont_res = mysqli_query($con, $cont_ins_sql);
 
     $id = mysqli_insert_id($con);
-    $html=FRONTEND_SITE_PATH."email_verify?id=".$random_str;
+    $html=FRONTEND_SITE_PATH."email_verify?cust_id=".$random_str;
     $email_sub = 'Please Verify your E-mail id';
     $greet = 'Dear User';
     $intro = 'Thank you for signing up with us!';
@@ -55,6 +55,42 @@ if ($sign_reg == 'register') {
 if ($sign_reg == 'login_msg') {
   $email = safe_valueto($_POST['user_email']);
   $password = safe_valueto($_POST['user_password']);
+
+  /* ------------ 
+    Admin Login
+  ----------------*/
+
+  // $sql="select * from admin where email='$email' and password='$password'";
+	// $res=mysqli_query($con,$sql);
+	// if(mysqli_num_rows($res)>0){
+	// 	$row=mysqli_fetch_assoc($res);
+	// 	$_SESSION['IS_LOGIN']='yes';
+	// 	$_SESSION['admin_nm']=$row['first_name'];
+  //   echo json_encode(array('status' => 'success', 'redirect' => 'index.php'));
+	// }else{
+  //   echo json_encode(array('status' => 'error', 'msg' => 'Login Error'));
+  // }
+
+  // $sql="select * from admin where email='$email' and password='$password'";
+	// $res=mysqli_query($con,$sql);
+	// if(mysqli_num_rows($res)>0){
+	// 	$row=mysqli_fetch_assoc($res);
+	// 	$_SESSION['IS_LOGIN']='yes';
+	// 	$_SESSION['admin_nm']=$row['first_name'];
+	// 	// redirect('admin/index.php');
+  //   echo"
+  //       <script>
+  //         alert('Admin Login Successfully...!');
+  //         window.location.href = 'admin/index.php';
+  //       </script>";
+	// }else{
+  //   $arr = array('status' => 'error', 'msg' => 'Please Enter Correct Password!!🙄', 'field' => 'pass_error');
+  //   echo json_encode($arr);
+	// }
+
+  /* ------------
+  End Admin Login
+  ---------------*/
   
   $log_sele_sql = "SELECT * FROM customer WHERE email = '$email'";
   $log_res = mysqli_query($con, $log_sele_sql);

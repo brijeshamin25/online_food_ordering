@@ -24194,6 +24194,20 @@ dl li {
   color: #fff;
 }
 
+.order_dtl_link_id{
+  background: #555;
+  padding: 1.2rem;
+  text-align: center;
+}
+
+.order_dtl_link_id a{
+  color: #fff;
+}
+
+.order_dtl_link_id:hover{
+  background: #333;
+}
+
 .inner_tabel{
   border: 1px solid #e9e8ef;
 }

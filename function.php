@@ -25,6 +25,11 @@ function safe_valueto($val){
   return $val;
 }
 
+function dateFormat($date){
+  $dt_str = strtotime($date);
+  return date('m-d-Y',$dt_str);
+}
+
 function send_email($email,$html,$subject){
 	$mail=new PHPMailer(true);
 	$mail->isSMTP();
@@ -204,7 +209,7 @@ function getFoodItemId($id){
 	return $prs_row;
 }
 
-function getUserInfo(){
+function getUserInfo($uid=''){
   global $con;
 	$data['fname'] = '';
 	$data['lname'] = '';
@@ -212,14 +217,15 @@ function getUserInfo(){
 	$data['phone'] = '';
 
 	if(isset($_SESSION['USER_ID'])){
-		$cst_sel_sql = "select * from customer where cust_id=".$_SESSION['USER_ID'];
-		$cst_sel_res = mysqli_query($con,$cst_sel_sql);
-		$cst_sel_row = mysqli_fetch_assoc($cst_sel_res);
-		$data['fname'] = $cst_sel_row['fname'];
-		$data['lname'] = $cst_sel_row['lname'];
-		$data['email'] = $cst_sel_row['email'];
-		$data['phone'] = $cst_sel_row['phone'];
+		$uid = $_SESSION['USER_ID'];
 	}
+	$cst_sel_sql = "select * from customer where cust_id=".$uid;
+	$cst_sel_res = mysqli_query($con,$cst_sel_sql);
+	$cst_sel_row = mysqli_fetch_assoc($cst_sel_res);
+	$data['fname'] = $cst_sel_row['fname'];
+	$data['lname'] = $cst_sel_row['lname'];
+	$data['email'] = $cst_sel_row['email'];
+	$data['phone'] = $cst_sel_row['phone'];
 	return $data;
 }
 
@@ -265,8 +271,8 @@ function getOrderById($oid){
 	return $data;
 }
 
-function orderPlacedEmail($oid){
-	$getUserInfo = getUserInfo();
+function orderPlacedEmail($oid,$uid=''){
+	$getUserInfo = getUserInfo($uid);
 	$fname = $getUserInfo['fname'];
 	$email = $getUserInfo['email'];
 
@@ -555,8 +561,6 @@ function orderPlacedEmail($oid){
 			
 			.purchase_total--label {
 				padding: 0 15px 0 0;
-				display: flex;
-				justify-content: end;
 			}
 			
 			body {
@@ -772,10 +776,10 @@ function orderPlacedEmail($oid){
 																		<th class="purchase_heading" align="left">
 																			<p class="f-fallback">Description</p>
 																		</th>
-																		<th class="purchase_heading" align="left">
+																		<th class="purchase_heading" align="center">
 																			<p class="f-fallback">Quantity</p>
 																		</th>
-																		<th class="purchase_heading" align="left">
+																		<th class="purchase_heading" align="center">
 																			<p class="f-fallback">Amount</p>
 																		</th>
 																	</tr>';
