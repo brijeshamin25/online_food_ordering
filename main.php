@@ -4,6 +4,7 @@ include('header.php');
 
 $mnu_itm = '';
 $food_type = '';
+$search_str = '';
 $mnu_itm_arry = array();
 
 if(isset($_GET['mnu_itm'])){
@@ -14,6 +15,10 @@ if(isset($_GET['mnu_itm'])){
 
 if(isset($_GET['food_type'])){
   $food_type = safe_valueto($_GET['food_type']);
+}
+
+if(isset($_GET['search_str'])){
+  $search_str = safe_valueto($_GET['search_str']);
 }
 
 $fd_ty_arr = array('veg','non-veg','both');
@@ -42,17 +47,22 @@ $fd_ty_arr = array('veg','non-veg','both');
         <div class="shop-topbar-wrapper">
           <div class="product-sorting-wrapper">
             <div class="product-show shorting-style search_box_main">
-            <?php
+              <?php
                 foreach($fd_ty_arr as $list){ 
                   $radio_selected = '';
                   if($list == $food_type){
                     $radio_selected = "checked='checked'";
                   }
                 ?>
-                  <?php echo strtoupper($list)?> <input type="radio" class="radioBtn" <?php echo $radio_selected?> name="food_type" value="<?php echo $list?>" onclick="setFoodType('<?php echo $list?>')"/>
-                <?php
-                }
-                ?>
+                <?php echo strtoupper($list)?> <input type="radio" class="radioBtn" <?php echo $radio_selected?> name="food_type" value="<?php echo $list?>" onclick="setFoodType('<?php echo $list?>')"/>
+              <?php
+              }
+              ?>
+            </div>
+
+            <div class="product-show shorting-style search_box_main_2">
+              <input type="textbox" id="search" class="search_box_txt" value="<?php echo $search_str?>"/>
+              <input type="button" class="submit btn-style search_box_btn" value="Search" onclick="setSearch()"/>
             </div>
           </div>
         </div>
@@ -66,6 +76,12 @@ $fd_ty_arr = array('veg','non-veg','both');
           if($food_type!= '' && $food_type!= 'both'){
             $food_sele_sql.=" and food_type = '$food_type'";
           }
+
+          if($search_str!= ''){
+            $food_sele_sql.=" and (food_name like '%$search_str%' or description like '%$search_str%')";
+          }
+
+          
           $food_sele_sql.=" order by food_name desc";
           $fd_res = mysqli_query($con,$food_sele_sql);
           $fd_count = mysqli_num_rows($fd_res);
@@ -179,6 +195,7 @@ $fd_ty_arr = array('veg','non-veg','both');
   <form method="get" id="menuItm">
     <input type="hidden" name="mnu_itm" id="mnu_itm" value="<?php echo $mnu_itm ?>">
     <input type="hidden" name="food_type" id="food_type" value="<?php echo $food_type ?>">
+    <input type="hidden" name="search_str" id="search_str" value='<?php echo $search_str ?>'>
   </form>
 </body>
 </html>

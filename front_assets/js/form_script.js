@@ -71,6 +71,11 @@ function setFoodType(food_type){
 	jQuery('#menuItm')[0].submit();
 }
 
+function setSearch(){
+	jQuery('#search_str').val(jQuery('#search').val());
+	jQuery('#menuItm')[0].submit();
+}
+
 function add_to_cart(id,cart_type){
 	var qty =jQuery('#qty'+id).val();
 	var attr =jQuery('input[name="radio'+id+'"]:checked').val();
