@@ -826,4 +826,16 @@ function orderPlacedEmail($oid,$uid=''){
 	</html>';
 	return $html;
 }
+
+function getSales($start, $end){
+	global $con;
+	$sale_sql = "select sum(total_price) as total_price from order_master where added_on between '$start' and '$end' and order_status=4";
+	$sales_res = mysqli_query($con,$sale_sql);
+	$arr = array();
+
+	while($row = mysqli_fetch_assoc($sales_res)){
+		return number_format($row['total_price'],2);
+	}
+	return $arr;
+}
 ?>

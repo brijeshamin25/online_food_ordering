@@ -4245,6 +4245,14 @@ form .succMsg{
     9. Checkout page
 -----------------------------*/
 
+.error_txt_msg{
+    color: red;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 3;
+    margin-left: 0.9rem;
+}
+
 .panel.panel-default {
     border: 1px solid #ebebeb;
     margin-bottom: 20px;
@@ -4713,20 +4721,30 @@ h5.panel-title span {
     text-align: center;
     width: 4rem;
     margin-left: 3rem;
-  }
+}
   
-  .order_dtl_link_id a{
+.order_dtl_link_id a{
     color: #fff;
-  }
+}
   
-  .order_dtl_link_id:hover{
+.order_dtl_link_id:hover{
     background: #333;
-  }
+}
 
-  .head_color{
+.head_color{
     color: #fff !important;
-  }
+}
 
+.cancel_btn{
+    background-color: red;
+    color: #fff;
+    padding: 4px;
+    line-height: 3; 
+}    
+
+.cancel_btn:hover{
+    background-color: crimson; 
+} 
 /*---------------------------
     11. Contact page
 -----------------------------*/

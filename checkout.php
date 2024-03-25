@@ -25,7 +25,7 @@ if(isset($_SESSION['USER_ID'])){
 $userArry = getUserInfo();
 
 if(isset($_POST['place_order'])){
-  prx($_POST);
+  //prx($_POST);
   $checkout_fname = safe_valueto($_POST['checkout_fname']);
   $checkout_lname = safe_valueto($_POST['checkout_lname']);
   $checkout_email = safe_valueto($_POST['checkout_email']);
@@ -53,11 +53,30 @@ if(isset($_POST['place_order'])){
     include('smtp/PHPMailerAutoload.php');
     send_email($email,$emailHTML,'Order Placed');
     redirect(FRONTEND_SITE_PATH.'success');
+  }else{
+    echo 201;
   }
 
-  if($payment_type == 'card'){
-    
-  }
+  // if ($payment_type == 'card') {
+  //   $totalPriceCent = $totalPrice * 100;
+  //   $html = '<form action="submit.php" method="post" id="stripe-form">
+  //       <script 
+  //       src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+  //       data-key="pk_test_51OxbkXCeUvhNqjKasgq22pz13qW7GhAa0m5D5U67RP6yjNXUbFjqVcSqLtoSkHigKAwmqU5s6yR5RlJggZ58jOLJ00w7pLWbeh"
+  //       data-amount="'.$totalPriceCent.'"
+  //       data-name="The Eatery"
+  //       data-description="Testing Payment"
+  //       data-image="https://w7.pngwing.com/pngs/743/757/png-transparent-the-eatery-hd-logo-thumbnail.png"
+  //       data-currency="usd"
+  //       data-email="'.$email.'"
+  //       > </script>
+  //   </form>';
+
+  //   echo $html;
+  // }
+
+  
+
   
   // prx($cartArry);
 
@@ -144,37 +163,43 @@ if(isset($_POST['place_order'])){
                           <div class="col-lg-2 col-md-6">
                             <div class="billing-info">
                               <label>First Name</label>
-                              <input type="text" name="checkout_fname" value="<?php echo $userArry['fname']?>" required>
+                              <input type="text" name="checkout_fname" id="checkout_fname" value="<?php echo $userArry['fname']?>" required>
+                              <small class="fname error_txt_msg"></small>
                             </div>
                           </div>
                           <div class="col-lg-2 col-md-6">
                             <div class="billing-info">
                               <label>Last Name</label>
-                              <input type="text" name="checkout_lname" value="<?php echo $userArry['lname']?>" required>
+                              <input type="text" name="checkout_lname" id="checkout_lname" value="<?php echo $userArry['lname']?>" required>
                             </div>
+                            <small class="lname error_txt_msg"></small>
                           </div>
                           <div class="col-lg-4 col-md-6">
                             <div class="billing-info">
                               <label>Email Address</label>
-                              <input type="email" name="checkout_email" value="<?php echo $userArry['email']?>" required>
+                              <input type="email" name="checkout_email" id="checkout_email" value="<?php echo $userArry['email']?>" required>
                             </div>
+                            <small class="email error_txt_msg"></small>
                           </div>
                           <div class="col-lg-3 col-md-6">
                             <div class="billing-info">
                               <label>Phone</label>
-                              <input type="number" name="checkout_phone" value="<?php echo $userArry['phone']?>" required>
+                              <input type="number" name="checkout_phone" id="checkout_phone" value="<?php echo $userArry['phone']?>" required>
+                              <small class="phone error_txt_msg"></small>
                             </div>
                           </div>
                           <div class="col-lg-3 col-md-6">
                             <div class="billing-info">
                               <label>Zip/Postal Code</label>
-                              <input type="text" name="checkout_zip" required>
+                              <input type="text" name="checkout_zip" id="checkout_zip" required>
+                              <small class="zip error_txt_msg"></small>
                             </div>
                           </div>
                           <div class="col-lg-6 col-md-12">
                             <div class="billing-info">
                               <label>Address</label>
-                              <input type="text" name="checkout_address" required>
+                              <input type="text" name="checkout_address" id="checkout_address" required>
+                              <small class="address error_txt_msg"></small>
                             </div>
                           </div>
                         </div>
@@ -185,10 +210,12 @@ if(isset($_POST['place_order'])){
                             <label>Cash on Delivery(COD)</label>
                           </div>
 
-                          <div class="single-ship">
+                          <!-- <div class="single-ship">
                             <input type="radio" name="payment_type" value="card" checked="checked">
                             <label>Pay With Card</label>
-                          </div>
+                          </div> -->
+
+                          <div id="paypal-button-container"></div>
                           <!--<div class="single-ship">
                             <input type="radio" name="address" value="dadress">
                             <label>Ship to different address</label>
@@ -243,3 +270,112 @@ if(isset($_POST['place_order'])){
 <?php
 include('footer.php');
 ?>
+
+<script src="https://www.paypal.com/sdk/js?client-id=AUZU3YsvYiPh-x1FmT2759Ah1O9cl-_vp_ZvC5xiGcUKi265D20oCLQ-Fkqu0p38U7aSg6N71pfK6CMI&currency=USD"></script>
+
+<script>
+  paypal.Buttons({
+    onClick(){
+      var checkout_fname = $('#checkout_fname').val();
+      var checkout_lname = $('#checkout_lname').val();
+      var checkout_email = $('#checkout_email').val();
+      var checkout_phone = $('#checkout_phone').val();
+      var checkout_zip = $('#checkout_zip').val();
+      var checkout_address = $('#checkout_address').val();
+
+      if(checkout_fname.length == 0){
+        $('.fname').text("First Name Required*");
+      }else{
+        $('.fname').text("");
+      }
+
+      if(checkout_lname.length == 0){
+        $('.lname').text("Last Name Required*");
+      }else{
+        $('.lname').text("");
+      }
+
+      if(checkout_email.length == 0){
+        $('.email').text("Email Required*");
+      }else{
+        $('.email').text("");
+      }
+      
+      if(checkout_phone.length == 0){
+        $('.phone').text("Phone Required*");
+      }else{
+        $('.phone').text("");
+      }
+
+      if(checkout_zip.length == 0){
+        $('.zip').text("Zip-Code Required*");
+      }else{
+        $('.zip').text("");
+      }
+
+      if(checkout_address.length == 0){
+        $('.address').text("Address Required*");
+      }else{
+        $('.address').text("");
+      }
+
+      if(checkout_fname.length == 0 || checkout_lname.length == 0 || checkout_email.length == 0 || checkout_phone.length == 0 || checkout_zip.length == 0 || checkout_address.length == 0){
+        return false;
+      }
+    },
+    
+    createOrder: (data,actions) => {
+      return actions.order.create({
+        purchase_units: [{
+          // "custom_id": "",
+          // "email": "",
+          amount:{
+            value: '<?php echo $totalPrice?>',
+          }
+        }]
+      });
+    },
+
+    onApprove: (data, actions) => {
+      return  actions.order.capture().then(function(orderData){
+        //console.log('Capture result',orderData, JSON.stringify(orderData,null,2));
+        const transaction =orderData.purchase_units[0].payments.captures[0];
+        //alert(`Transaction ${transaction.status}: ${transaction.id} \n\n see console for result`);
+
+        var checkout_fname = $('#checkout_fname').val();
+        var checkout_lname = $('#checkout_lname').val();
+        var checkout_email = $('#checkout_email').val();
+        var checkout_phone = $('#checkout_phone').val();
+        var checkout_zip = $('#checkout_zip').val();
+        var checkout_address = $('#checkout_address').val();
+
+        var data = {
+          'checkout_fname': checkout_fname,
+          'checkout_lname': checkout_lname,
+          'checkout_email': checkout_email,
+          'checkout_phone': checkout_phone,
+          'checkout_zip': checkout_zip,
+          'checkout_address': checkout_address,
+          'payment_type': "PayPal",
+          // 'payment_id': transaction.id,
+        }
+
+        $.ajax({
+          method:"POST",
+          url: "checkout.php",
+          data: data,
+          success: function(response){
+            if(response == 201){
+              // $getUserInfo = getUserInfo();
+	            // $email = $getUserInfo['email'];
+              // $emailHTML = orderPlacedEmail($insert_id);
+              // include('smtp/PHPMailerAutoload.php');
+              // send_email($email,$emailHTML,'Order Placed');
+                actions.redirect('success.php');
+            }
+          }
+        })
+      });
+    }
+  }).render('#paypal-button-container');
+</script>

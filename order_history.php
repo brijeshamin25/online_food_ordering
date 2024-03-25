@@ -7,6 +7,13 @@ if(!isset($_SESSION['USER_ID'])){
 
 $cid = $_SESSION['USER_ID'];
 
+if(isset($_GET['cancel_id'])){
+	$cancel_id = safe_valueto($_GET['cancel_id']);
+
+	$cancel_at = date('Y-m-d h:i:s');
+	mysqli_query($con,"update order_master set order_status = '5',cancel_by='customer',cancel_at='$cancel_at' where order_master_id='$cancel_id' and order_status='1' and customer_id='$cid'");
+}
+
 $all_data_sql = "select order_master.*,order_status.order_status as order_status_str from order_master,order_status where order_master.order_status=order_status.order_status_id and order_master.customer_id='$cid' order by order_master.order_master_id desc";
 $res = mysqli_query($con, $all_data_sql);
 
@@ -58,7 +65,16 @@ $res = mysqli_query($con, $all_data_sql);
 											<td>
 												<?php echo $row['zip_code'] ?>
 											</td>	
-											<td><?php echo $row['order_status_str'] ?></td>
+											<td>
+												<?php
+													echo $row['order_status_str'];
+
+													if($row['order_status'] == 1){
+														echo '<br>';
+														echo "<a class='cancel_btn' href='?cancel_id=".$row['order_master_id']."'>Cancel</a>";
+													}
+												?>
+											</td>
 											<td>
 												<div class="payment_status payment_status_<?php echo $row['payment_status']?>"><?php echo ucfirst($row['payment_status']) ?></div>
 											</td>

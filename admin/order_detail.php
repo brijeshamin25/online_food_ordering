@@ -6,7 +6,16 @@ if(isset($_GET['order_master_id']) && $_GET['order_master_id'] > 0){
 
 	if(isset($_GET['order_status'])){
 		$order_status = safe_valueto($_GET['order_status']);
-		$order_upd_sql = "update order_master set order_status = '$order_status' where order_master_id='$id'";
+
+		if($order_status == 5){
+			$cancel_at = date('Y-m-d h:i:s');
+			$order_upd_sql = "update order_master set order_status = '$order_status',cancel_by='admin',cancel_at='$cancel_at' where order_master_id='$id'";
+		}else{
+			$order_upd_sql = "update order_master set order_status = '$order_status' where order_master_id='$id'";
+		}
+		
+
+		
 		$order_upd_res = mysqli_query($con,$order_upd_sql);
 		redirect(FRONTEND_SITE_PATH.'admin/order_detail.php?order_master_id='.$id);
 	}
